@@ -12,4 +12,4 @@
 ## Updates
 Typescript! The first step was moving through files, changing the extensions, and resolving any issues that arose. First of these was that Chakra UI v1.0 has better Typescript support
 I followed the steps documented at https://chakra-ui.com/docs/migration
-I also added @types/react-router-dom to bring in some missing types.
+I also added @types/react-router-dom to bring in some missing types.# pleo-space-rockets
