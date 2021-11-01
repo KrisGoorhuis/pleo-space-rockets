@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@chakra-ui/react": "^0.8.0",
+    "@chakra-ui/react": "^1.6.10",
     "@emotion/react": "^10.0.35",
     "@emotion/styled": "^11.0.0",
     "@testing-library/react": "^12.1.2",

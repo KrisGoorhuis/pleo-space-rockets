@@ -18,28 +18,30 @@
 
 
 ## Updates
-Typescript! The first step was moving through files, changing the extensions, and resolving any issues that arose. First of these was that Chakra UI v1.0 has better Typescript support
+### Typescript! 
+
+Updating Chakra was the first step, as TS support has improved with 1.0. I followed the steps documented at https://chakra-ui.com/docs/migration
+Some components and the theme provider had their names changed. Some find and replace.
 
 
-I followed the steps documented at https://chakra-ui.com/docs/migration
-   - /core changed to /react AspectRatioBox is now AspectRatio
-   - passing type parameters (react-router-dom useParams<>, swr useSwr<>)
+Next was updating utilities to pass type parameters to the imports they used, and in turn update these utilities to accept the type parameters they needed to use.
+For example, useParams() from react-routerDom and useSWR() are now taking types
 
-I also added @types/react-router-dom to bring in some missing types.# pleo-space-rockets
+I also added @types/react-router-dom to bring in some missing types.
 
-I cheated a bit with the types returned from the API.
+The types associated with data returned from spacexdata.com were built with a little bit of cheating. 
+The launch pad object in particular is huge, so converting it to a hard type by hand would take a fair bit of time.
 
-Added       rules: [
-        {
-          type: 'javascript/auto',
-          test: /\.mjs$/,
-          use: []
-        },
-        to the webpack config
+framer-motion, which came with the Chakra update, required a webpack config update. The following was added to the rules in node_modules\react-scripts\config\webpack.config.js:
 
-Modifying utilities to accept type parameters
+   {
+      type: 'javascript/auto',
+      test: /\.mjs$/,
+      use: []
+   },
 
-"alt" does not exist on html element 'iframe'
+There were a few other small updates, such as removing the "alt" from a Chakra element appearing as an iframe
+
 
 
 # pleo-space-rockets

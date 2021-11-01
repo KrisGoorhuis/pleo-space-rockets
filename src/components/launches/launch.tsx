@@ -98,15 +98,15 @@ function Header(props: LaunchProps) {
         {props.launch.mission_name}
       </Heading>
       <Stack isInline spacing="3">
-        <Badge variantColor="purple" fontSize={["xs", "md"]}>
+        <Badge colorScheme="purple" fontSize={["xs", "md"]}>
           #{props.launch.flight_number}
         </Badge>
         {props.launch.launch_success ? (
-          <Badge variantColor="green" fontSize={["xs", "md"]}>
+          <Badge colorScheme="green" fontSize={["xs", "md"]}>
             Successful
           </Badge>
         ) : (
-          <Badge variantColor="red" fontSize={["xs", "md"]}>
+          <Badge colorScheme="red" fontSize={["xs", "md"]}>
             Failed
           </Badge>
         )}

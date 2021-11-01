@@ -58,11 +58,11 @@ function LaunchPadItem(props: LaunchPadProps) {
       <Box p="6">
         <Box d="flex" alignItems="baseline">
           {props.launchPad.status === "active" ? (
-            <Badge px="2" variant="solid" variantColor="green">
+            <Badge px="2" variant="solid" colorScheme="green">
               Active
             </Badge>
           ) : (
-            <Badge px="2" variant="solid" variantColor="red">
+            <Badge px="2" variant="solid" colorScheme="red">
               Retired
             </Badge>
           )}

@@ -82,11 +82,11 @@ export function LaunchItem(props: {launch: Launch}) {
       <Box p="6">
         <Box d="flex" alignItems="baseline">
           {props.launch.launch_success ? (
-            <Badge px="2" variant="solid" variantColor="green">
+            <Badge px="2" variant="solid" colorScheme="green">
               Successful
             </Badge>
           ) : (
-            <Badge px="2" variant="solid" variantColor="red">
+            <Badge px="2" variant="solid" colorScheme="red">
               Failed
             </Badge>
           )}

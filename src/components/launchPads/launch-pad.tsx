@@ -95,16 +95,16 @@ function Header(props: {launchPad: LaunchPadType}) {
         {props.launchPad.site_name_long}
       </Heading>
       <Stack isInline spacing="3">
-        <Badge variantColor="purple" fontSize={["sm", "md"]}>
+        <Badge colorScheme="purple" fontSize={["sm", "md"]}>
           {props.launchPad.successful_launches}/{props.launchPad.attempted_launches}{" "}
           successful
         </Badge>
         {props.launchPad.status === "active" ? (
-          <Badge variantColor="green" fontSize={["sm", "md"]}>
+          <Badge colorScheme="green" fontSize={["sm", "md"]}>
             Active
           </Badge>
         ) : (
-          <Badge variantColor="red" fontSize={["sm", "md"]}>
+          <Badge colorScheme="red" fontSize={["sm", "md"]}>
             Retired
           </Badge>
         )}
