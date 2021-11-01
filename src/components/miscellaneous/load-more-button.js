@@ -1,5 +1,5 @@
 import React from "react";
-import { Spinner, Flex, Button } from "@chakra-ui/core";
+import { Spinner, Flex, Button } from "@chakra-ui/react";
 
 export default function LoadMoreButton({
   loadMore,

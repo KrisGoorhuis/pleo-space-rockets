@@ -1,12 +1,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Flex, Text } from "@chakra-ui/core";
+import { Flex, Text } from "@chakra-ui/react";
 
-import Launches from "./launches";
-import Launch from "./launch";
+import Launches from "./launches/launches";
+import Launch from "./launches/launch";
 import Home from "./home";
-import LaunchPads from "./launch-pads";
-import LaunchPad from "./launch-pad";
+import LaunchPads from "./launchPads/launch-pads";
+import LaunchPad from "./launchPads/launch-pad";
 
 export default function App() {
   return (

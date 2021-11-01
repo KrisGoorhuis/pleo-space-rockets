@@ -17,18 +17,20 @@ import {
   Image,
   Link,
   Stack,
-  AspectRatioBox,
+  AspectRatio,
   StatGroup,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 
-import { useSpaceX } from "../utils/use-space-x";
-import { formatDateTime } from "../utils/format-date";
-import Error from "./error";
-import Breadcrumbs from "./breadcrumbs";
+import { useSpaceX } from "../../utils/use-space-x";
+import { formatDateTime } from "../../utils/format-date";
+import Error from "./../miscellaneous/error";
+import Breadcrumbs from "./../miscellaneous/breadcrumbs";
+import { LaunchProps, Launch as LaunchType } from "../../model";
+
 
 export default function Launch() {
-  let { launchId } = useParams();
-  const { data: launch, error } = useSpaceX(`/launches/${launchId}`);
+  let { launchId } = useParams<string>();
+  const { data: launch, error } = useSpaceX<LaunchType>(`/launches/${launchId}`);
 
   if (error) return <Error />;
   if (!launch) {
@@ -62,10 +64,10 @@ export default function Launch() {
   );
 }
 
-function Header({ launch }) {
+function Header(props: LaunchProps) {
   return (
     <Flex
-      bgImage={`url(${launch.links.flickr_images[0]})`}
+      bgImage={`url(${props.launch.links.flickr_images[0]})`}
       bgPos="center"
       bgSize="cover"
       bgRepeat="no-repeat"
@@ -79,7 +81,7 @@ function Header({ launch }) {
         position="absolute"
         top="5"
         right="5"
-        src={launch.links.mission_patch_small}
+        src={props.launch.links.mission_patch_small}
         height={["85px", "150px"]}
         objectFit="contain"
         objectPosition="bottom"
@@ -93,13 +95,13 @@ function Header({ launch }) {
         py="2"
         borderRadius="lg"
       >
-        {launch.mission_name}
+        {props.launch.mission_name}
       </Heading>
       <Stack isInline spacing="3">
         <Badge variantColor="purple" fontSize={["xs", "md"]}>
-          #{launch.flight_number}
+          #{props.launch.flight_number}
         </Badge>
-        {launch.launch_success ? (
+        {props.launch.launch_success ? (
           <Badge variantColor="green" fontSize={["xs", "md"]}>
             Successful
           </Badge>
@@ -113,7 +115,7 @@ function Header({ launch }) {
   );
 }
 
-function TimeAndLocation({ launch }) {
+function TimeAndLocation(props: LaunchProps) {
   return (
     <SimpleGrid columns={[1, 1, 2]} borderWidth="1px" p="4" borderRadius="md">
       <Stat>
@@ -124,9 +126,9 @@ function TimeAndLocation({ launch }) {
           </Box>
         </StatLabel>
         <StatNumber fontSize={["md", "xl"]}>
-          {formatDateTime(launch.launch_date_local)}
+          {formatDateTime(props.launch.launch_date_local)}
         </StatNumber>
-        <StatHelpText>{timeAgo(launch.launch_date_utc)}</StatHelpText>
+        <StatHelpText>{timeAgo(props.launch.launch_date_utc)}</StatHelpText>
       </Stat>
       <Stat>
         <StatLabel display="flex">
@@ -138,19 +140,19 @@ function TimeAndLocation({ launch }) {
         <StatNumber fontSize={["md", "xl"]}>
           <Link
             as={RouterLink}
-            to={`/launch-pads/${launch.launch_site.site_id}`}
+            to={`/launch-pads/${props.launch.launch_site.site_id}`}
           >
-            {launch.launch_site.site_name_long}
+            {props.launch.launch_site.site_name_long}
           </Link>
         </StatNumber>
-        <StatHelpText>{launch.launch_site.site_name}</StatHelpText>
+        <StatHelpText>{props.launch.launch_site.site_name}</StatHelpText>
       </Stat>
     </SimpleGrid>
   );
 }
 
-function RocketInfo({ launch }) {
-  const cores = launch.rocket.first_stage.cores;
+function RocketInfo(props: LaunchProps) {
+  const cores = props.launch.rocket.first_stage.cores;
 
   return (
     <SimpleGrid
@@ -168,9 +170,9 @@ function RocketInfo({ launch }) {
           </Box>
         </StatLabel>
         <StatNumber fontSize={["md", "xl"]}>
-          {launch.rocket.rocket_name}
+          {props.launch.rocket.rocket_name}
         </StatNumber>
-        <StatHelpText>{launch.rocket.rocket_type}</StatHelpText>
+        <StatHelpText>{props.launch.rocket.rocket_type}</StatHelpText>
       </Stat>
       <StatGroup>
         <Stat>
@@ -199,11 +201,11 @@ function RocketInfo({ launch }) {
             </Box>
           </StatLabel>
           <StatNumber fontSize={["md", "xl"]}>
-            Block {launch.rocket.second_stage.block}
+            Block {props.launch.rocket.second_stage.block}
           </StatNumber>
           <StatHelpText>
             Payload:{" "}
-            {launch.rocket.second_stage.payloads
+            {props.launch.rocket.second_stage.payloads
               .map((payload) => payload.payload_type)
               .join(", ")}
           </StatHelpText>
@@ -213,23 +215,23 @@ function RocketInfo({ launch }) {
   );
 }
 
-function Video({ launch }) {
+function Video(props: LaunchProps) {
   return (
-    <AspectRatioBox maxH="400px" ratio={1.7}>
+    <AspectRatio maxH="400px" ratio={1.7}>
       <Box
         as="iframe"
-        title={launch.mission_name}
-        src={`https://www.youtube.com/embed/${launch.links.youtube_id}`}
+        title={props.launch.mission_name}
+        src={`https://www.youtube.com/embed/${props.launch.links.youtube_id}`}
         allowFullScreen
       />
-    </AspectRatioBox>
+    </AspectRatio>
   );
 }
 
-function Gallery({ images }) {
+function Gallery(props: {images: LaunchType['links']['flickr_images']}) {
   return (
     <SimpleGrid my="6" minChildWidth="350px" spacing="4">
-      {images.map((image) => (
+      {props.images.map((image) => (
         <a href={image} key={image}>
           <Image src={image.replace("_o.jpg", "_z.jpg")} />
         </a>

@@ -5,7 +5,7 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 
 export default function Error() {
   return (

@@ -1,13 +1,16 @@
 import React from "react";
-import { Badge, Box, SimpleGrid, Text } from "@chakra-ui/core";
+import { Badge, Box, SimpleGrid, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import Error from "./error";
-import Breadcrumbs from "./breadcrumbs";
-import LoadMoreButton from "./load-more-button";
-import { useSpaceXPaginated } from "../utils/use-space-x";
+import Error from "./../miscellaneous/error";
+import Breadcrumbs from "./../miscellaneous/breadcrumbs";
+import LoadMoreButton from "./../miscellaneous/load-more-button";
+import { useSpaceXPaginated } from "../../utils/use-space-x";
+import { LaunchPad, LaunchPadProps } from "../../model";
 
 const PAGE_SIZE = 12;
+
+
 
 export default function LaunchPads() {
   const { data, error, isValidating, size, setSize } = useSpaceXPaginated(
@@ -32,7 +35,7 @@ export default function LaunchPads() {
             ))}
       </SimpleGrid>
       <LoadMoreButton
-        loadMore={() => setSize(size + 1)}
+        loadMore={() => size && setSize && setSize(size + 1)}
         data={data}
         pageSize={PAGE_SIZE}
         isLoadingMore={isValidating}
@@ -41,11 +44,11 @@ export default function LaunchPads() {
   );
 }
 
-function LaunchPadItem({ launchPad }) {
+function LaunchPadItem(props: LaunchPadProps) {
   return (
     <Box
       as={Link}
-      to={`/launch-pads/${launchPad.site_id}`}
+      to={`/launch-pads/${props.launchPad.site_id}`}
       boxShadow="md"
       borderWidth="1px"
       rounded="lg"
@@ -54,7 +57,7 @@ function LaunchPadItem({ launchPad }) {
     >
       <Box p="6">
         <Box d="flex" alignItems="baseline">
-          {launchPad.status === "active" ? (
+          {props.launchPad.status === "active" ? (
             <Badge px="2" variant="solid" variantColor="green">
               Active
             </Badge>
@@ -71,8 +74,8 @@ function LaunchPadItem({ launchPad }) {
             textTransform="uppercase"
             ml="2"
           >
-            {launchPad.attempted_launches} attempted &bull;{" "}
-            {launchPad.successful_launches} succeeded
+            {props.launchPad.attempted_launches} attempted &bull;{" "}
+            {props.launchPad.successful_launches} succeeded
           </Box>
         </Box>
 
@@ -83,10 +86,11 @@ function LaunchPadItem({ launchPad }) {
           lineHeight="tight"
           isTruncated
         >
-          {launchPad.name}
+          {props.launchPad.location.name} 
+          {/* TODO: added launchPad above */}
         </Box>
         <Text color="gray.500" fontSize="sm">
-          {launchPad.vehicles_launched.join(", ")}
+          {props.launchPad.vehicles_launched.join(", ")}
         </Text>
       </Box>
     </Box>
