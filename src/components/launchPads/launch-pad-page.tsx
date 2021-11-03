@@ -18,10 +18,10 @@ import {
 } from "@chakra-ui/react";
 
 import { useSpaceX } from "../../utils/use-space-x";
-import Error from "../miscellaneous/error";
-import Breadcrumbs from "../miscellaneous/breadcrumbs";
-import { LaunchItem } from "../launches/launches";
+import Error from "./../error";
+import Breadcrumbs from "./../breadcrumbs";
 import { Launch, LaunchPad as LaunchPadType, LaunchPadProps } from '../../model/index'
+import { LaunchItem } from "../launches/launchItem";
 
 
 
@@ -60,7 +60,12 @@ export default function LaunchPad() {
         <Text color="gray.700" fontSize={["md", null, "lg"]} my="8">
           {launchPad.details}
         </Text>
-        <Map location={launchPad.location} />
+        <AspectRatio ratio={16 / 5}>
+          <Box
+            as="iframe"
+            src={`https://maps.google.com/maps?q=${launchPad.location.latitude}, ${launchPad.location.longitude}&z=15&output=embed`}
+          />
+        </AspectRatio>
         <RecentLaunches launches={launches || []} />
       </Box>
     </div>
@@ -70,7 +75,7 @@ export default function LaunchPad() {
 const randomColor = (start = 200, end = 250) =>
   `hsl(${start + end * Math.random()}, 80%, 90%)`;
 
-function Header(props: {launchPad: LaunchPadType}) {
+function Header(props: { launchPad: LaunchPadType }) {
   return (
     <Flex
       background={`linear-gradient(${randomColor()}, ${randomColor()})`}
@@ -93,6 +98,7 @@ function Header(props: {launchPad: LaunchPadType}) {
         borderRadius="lg"
       >
         {props.launchPad.site_name_long}
+        LAUNCH PAD PAGE
       </Heading>
       <Stack isInline spacing="3">
         <Badge colorScheme="purple" fontSize={["sm", "md"]}>
@@ -141,18 +147,8 @@ function LocationAndVehicles(props: LaunchPadProps) {
   );
 }
 
-function Map(props: {location: LaunchPadType['location']}) {
-  return (
-    <AspectRatio ratio={16 / 5}>
-      <Box
-        as="iframe"
-        src={`https://maps.google.com/maps?q=${props.location.latitude}, ${props.location.longitude}&z=15&output=embed`}
-      />
-    </AspectRatio>
-  );
-}
 
-function RecentLaunches(props: {launches: Launch[]}) {
+function RecentLaunches(props: { launches: Launch[] }) {
   if (!props.launches?.length) {
     return null;
   }

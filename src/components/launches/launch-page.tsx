@@ -23,8 +23,8 @@ import {
 
 import { useSpaceX } from "../../utils/use-space-x";
 import { formatDateTime } from "../../utils/format-date";
-import Error from "./../miscellaneous/error";
-import Breadcrumbs from "./../miscellaneous/breadcrumbs";
+import Error from "../error";
+import Breadcrumbs from "../breadcrumbs";
 import { LaunchProps, Launch as LaunchType } from "../../model";
 
 

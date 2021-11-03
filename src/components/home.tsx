@@ -12,9 +12,17 @@ export default function Home() {
   );
 }
 
-function PageLink({ url, children, ...rest }) {
+interface PageLinkProps {
+  url: string
+  children: any
+  [x:string]: any
+}
+
+// { url, children, ...rest }
+
+function PageLink(props: PageLinkProps) {
   return (
-    <Link as={BrowserLink} to={url} {...rest}>
+    <Link as={BrowserLink} to={props.url} {...props.rest}>
       <Flex
         justifyContent="space-between"
         p="6"
@@ -22,7 +30,7 @@ function PageLink({ url, children, ...rest }) {
         borderWidth="1px"
         rounded="lg"
       >
-        <Text fontSize="lg">{children}</Text>
+        <Text fontSize="lg">{props.children}</Text>
         <Box as={ArrowRight} />
       </Flex>
     </Link>

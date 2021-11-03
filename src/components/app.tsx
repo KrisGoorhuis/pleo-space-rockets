@@ -1,16 +1,24 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import { Flex, Text } from "@chakra-ui/react";
+import React, { MouseEventHandler, SetStateAction } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import { Box, Flex, Text, } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react"
+import { Star } from "react-feather";
 
 import Launches from "./launches/launches";
-import Launch from "./launches/launch";
+import Launch from "./launches/launch-page";
 import Home from "./home";
 import LaunchPads from "./launchPads/launch-pads";
-import LaunchPad from "./launchPads/launch-pad";
+import LaunchPad from "./launchPads/launch-pad-page";
+import SideDrawer from "./drawer/drawer";
+import { toggleFavoritesOpen } from "../redux/slices/favoritesSlice";
+import { useDispatch } from "react-redux";
+
 
 export default function App() {
+
   return (
     <div>
+      <SideDrawer />
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -24,6 +32,12 @@ export default function App() {
 }
 
 function NavBar() {
+  const dispatch = useDispatch()
+
+  const handleToggleIsOpen = () => {
+    dispatch(toggleFavoritesOpen())
+  }
+
   return (
     <Flex
       as="nav"
@@ -39,9 +53,20 @@ function NavBar() {
         letterSpacing="2px"
         fontWeight="bold"
         fontSize="lg"
+        as={Link}
+        to={"/"}
       >
         ¡SPACE·R0CKETS!
       </Text>
+
+      <Button onClick={handleToggleIsOpen}>
+        <Box as={Star} />
+        Favorites
+      </Button>
     </Flex>
   );
 }
+function dispatch(arg0: { payload: undefined; type: string; }) {
+  throw new Error("Function not implemented.");
+}
+

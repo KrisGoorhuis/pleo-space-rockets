@@ -1,6 +1,4 @@
-import useSWR, { SWRInfiniteResponseInterface, useSWRInfinite } from "swr";
-import { Launch, LaunchPad } from "../model";
-import { ExampleLaunch } from "../model/exampleLaunch";
+import useSWR, { useSWRInfinite } from "swr";
 
 interface QueryOptions {
   [x: string]: any // Keys in options dependent upon spacex api endpoint

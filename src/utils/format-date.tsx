@@ -1,4 +1,4 @@
-export function formatDate(timestamp) {
+export function formatDate(timestamp: string | number | Date) {
   return new Intl.DateTimeFormat("en-US", {
     weekday: "long",
     year: "numeric",
@@ -7,7 +7,7 @@ export function formatDate(timestamp) {
   }).format(new Date(timestamp));
 }
 
-export function formatDateTime(timestamp) {
+export function formatDateTime(timestamp: string | number | Date) {
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",

@@ -2,11 +2,11 @@ import React from "react";
 import { Badge, Box, SimpleGrid, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import Error from "./../miscellaneous/error";
-import Breadcrumbs from "./../miscellaneous/breadcrumbs";
-import LoadMoreButton from "./../miscellaneous/load-more-button";
+import Error from "../error";
+import Breadcrumbs from "../breadcrumbs";
+import LoadMoreButton from "../load-more-button";
 import { useSpaceXPaginated } from "../../utils/use-space-x";
-import { LaunchPad, LaunchPadProps } from "../../model";
+import { LaunchPadProps } from "../../model";
 
 const PAGE_SIZE = 12;
 
@@ -87,7 +87,6 @@ function LaunchPadItem(props: LaunchPadProps) {
           isTruncated
         >
           {props.launchPad.location.name} 
-          {/* TODO: added launchPad above */}
         </Box>
         <Text color="gray.500" fontSize="sm">
           {props.launchPad.vehicles_launched.join(", ")}

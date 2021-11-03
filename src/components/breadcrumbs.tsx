@@ -7,13 +7,14 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { ChevronsRight } from "react-feather";
-import { BreadcrumbObject } from "../../model";
+import { BreadcrumbObject } from "../model";
 
 interface BreadcrumbsProps {
   items: BreadcrumbObject[]
 }
 
 export default function Breadcrumbs(props: BreadcrumbsProps) {
+
   return (
     <Breadcrumb
       m="6"
