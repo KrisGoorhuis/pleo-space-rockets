@@ -1,4 +1,4 @@
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input, useDisclosure } from "@chakra-ui/react"
+import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay } from "@chakra-ui/react"
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { State } from "../../redux"
@@ -30,7 +30,7 @@ const SideDrawer = (props: SideDrawerProps) => {
             <DrawerOverlay />
             <DrawerContent>
                <DrawerCloseButton />
-               <DrawerHeader>Favorite</DrawerHeader>
+               <DrawerHeader>Favorites</DrawerHeader>
 
                <DrawerBody>
                   <DrawerContents />

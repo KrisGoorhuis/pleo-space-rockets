@@ -63,7 +63,7 @@ const DrawerContents = (props: DrawerContentsProps) => {
                      favoriteLaunchPads.map((launchPad, i) => {
                         return (
                            <Box >
-                              <LaunchPadItem key={launchPad.site_id} launchPad={launchPad} />
+                              <LaunchPadItem key={launchPad.site_id} launchPad={launchPad} isDrawerFavorite />
                               {
                                  i < favoriteLaunchPads.length - 1 && favoriteLaunchPads.length > 0 &&
                                  <Divider marginBottom="24px" />
