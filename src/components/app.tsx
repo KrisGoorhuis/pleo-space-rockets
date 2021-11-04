@@ -59,14 +59,11 @@ function NavBar() {
         ¡SPACE·R0CKETS!
       </Text>
 
-      <Button onClick={handleToggleIsOpen}>
-        <Box as={Star} />
+      <Button variant={'outline'} onClick={handleToggleIsOpen} >
+        <Box style={{color: 'gold', marginRight: 10, marginLeft: -5, position: 'relative', top: 1 }} as={Star} />
         Favorites
       </Button>
     </Flex>
   );
-}
-function dispatch(arg0: { payload: undefined; type: string; }) {
-  throw new Error("Function not implemented.");
 }
 

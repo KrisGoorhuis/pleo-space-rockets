@@ -74,3 +74,8 @@ Are elements within Launch and launch-pads identical? To be taken out?
 
 ## Things I'd Do With More Time
 There are still `any` types here and there. The 
+
+
+## Drawer
+Confirmation on removal because it's far easier to remove than add back.
+Indent on 'ago' was not intentional, but I decided I liked it for the grayed subtext
