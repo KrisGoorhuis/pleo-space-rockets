@@ -2,13 +2,10 @@ import { Badge, Flex, Box, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { format as timeAgo } from "timeago.js";
-import { Check, X, Star } from "react-feather";
 
-import { formatDate } from "../../utils/format-date";
+import { formatDateSimple } from "../../utils/format-date";
 import { Launch } from "../../model";
-import { useDispatch, useSelector } from "react-redux";
-import { addToFavoriteLaunches, removeFromFavoriteLaunches } from "../../redux/slices/favoritesSlice";
-import { State } from "../../redux";
+import FavoriteLaunchButton from "./favoriteLaunchButton";
 
 
 interface LaunchItemProps {
@@ -17,38 +14,6 @@ interface LaunchItemProps {
 }
 
 export function LaunchItem(props: LaunchItemProps) {
-   const dispatch = useDispatch()
-   const [confirming, setConfirming] = React.useState<boolean>(false)
-
-   const favoriteLaunches = useSelector((state: State) => state.favorites.favoriteLaunches)
-   const isFavorited = favoriteLaunches.filter((launch: Launch) => launch.flight_number === props.launch.flight_number).includes(props.launch)
-  
-  
-   const toggleFavorite = () => {
-      if (isFavorited) {
-         dispatch(removeFromFavoriteLaunches(props.launch))
-      }
-      else {
-         dispatch(addToFavoriteLaunches(props.launch))
-      }
-   }
-
-   const handleToggleFavorite = (e: any) => { // Event typing 
-      e.preventDefault() // Prevent parent's onclick
-
-      if (props.isDrawerFavorite && !confirming) { // Non drawer favorites and confirmation clicks will bypass
-         setConfirming(true)
-      }
-      else toggleFavorite()
-   }
-
-   const handleCancel = (e: any) => {
-      e.preventDefault()
-
-      setConfirming(false)
-   }
-
- 
 
    return (
       <Box
@@ -108,33 +73,7 @@ export function LaunchItem(props: LaunchItemProps) {
                      {props.launch.rocket.rocket_name} &bull; {props.launch.launch_site.site_name}
                   </Box>
                </Box>
-               <Box marginLeft="10px">
-                  {
-                     confirming &&
-                     <Box display="flex">
-                        <Box
-                           style={{ color: 'greenyellow', position: 'relative', top: 5 }}
-                           as={Check}
-                           onClick={handleToggleFavorite}
-                        />
-                        <Box
-                           style={{ color: 'red', position: 'relative', top: 5 }}
-                           as={X}
-                           onClick={handleCancel}
-                        />
-
-                     </Box>
-                  }
-                  {
-                     !confirming &&
-                     <Box
-                        style={{ color: isFavorited ? 'gold' : 'darkgray', position: 'relative', top: 5 }}
-                        as={Star}
-                        onClick={handleToggleFavorite}
-                     />
-                  }
-               </Box>
-
+              <FavoriteLaunchButton {...props} />
             </Box>
             <Box
                mt="1"
@@ -146,7 +85,7 @@ export function LaunchItem(props: LaunchItemProps) {
                {props.launch.mission_name}
             </Box>
             <Flex flexDirection={props.isDrawerFavorite ? 'column' : 'row'}>
-               <Text fontSize="sm">{formatDate(props.launch.launch_date_utc)} </Text>
+               <Text fontSize="sm">{formatDateSimple(props.launch.launch_date_utc)} </Text>
                <Text color="gray.500" ml="2" fontSize="sm">
                   {timeAgo(props.launch.launch_date_utc)}
                </Text>

@@ -15,7 +15,7 @@ const DrawerContents = (props: DrawerContentsProps) => {
    const favoriteLaunchPads = useSelector((state: State) => state.favorites.favoriteLaunchPads)
 
    return (
-      <Accordion allowMultiple>
+      <Accordion defaultIndex={[0]} allowToggle>
          {
             favoriteLaunches.length > 0 ?
             <AccordionItem border={0}>
@@ -29,8 +29,8 @@ const DrawerContents = (props: DrawerContentsProps) => {
                   {
                      favoriteLaunches.map((launch, i) => {
                         return (
-                           <Box>
-                              <LaunchItem launch={launch} key={launch.flight_number} isDrawerFavorite />
+                           <Box key={launch.flight_number}>
+                              <LaunchItem launch={launch} isDrawerFavorite />
                               {
                                  i < favoriteLaunches.length - 1 && favoriteLaunches.length > 0 &&
                                  <Divider marginBottom="24px" />
@@ -62,8 +62,8 @@ const DrawerContents = (props: DrawerContentsProps) => {
                   {
                      favoriteLaunchPads.map((launchPad, i) => {
                         return (
-                           <Box >
-                              <LaunchPadItem key={launchPad.site_id} launchPad={launchPad} isDrawerFavorite />
+                           <Box key={launchPad.site_id}>
+                              <LaunchPadItem launchPad={launchPad} isDrawerFavorite />
                               {
                                  i < favoriteLaunchPads.length - 1 && favoriteLaunchPads.length > 0 &&
                                  <Divider marginBottom="24px" />

@@ -1,6 +1,13 @@
 import { ExampleLaunch } from "./example-launch";
 import { ExampleLaunchPad } from "./example-launch-pads";
 
+
+export enum LocalStorageKeys {
+   favoriteLaunches = "favoriteLaunches",
+   favoriteLaunchPads = "favoriteLaunchPads"
+}
+
+
 export interface BreadcrumbObject {
    label: string
    to?: string

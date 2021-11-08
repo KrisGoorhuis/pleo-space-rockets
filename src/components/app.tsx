@@ -5,20 +5,17 @@ import { Button } from "@chakra-ui/react"
 import { Star } from "react-feather";
 
 import Launches from "./launches/launches";
-import Launch from "./launches/launch-page";
+import Launch from "./launches/launchPage/launch-page";
 import Home from "./home";
 import LaunchPads from "./launchPads/launch-pads";
-import LaunchPad from "./launchPads/launch-pad-page";
+import LaunchPad from "./launchPads/launchPadPage/launch-pad-page";
 import SideDrawer from "./drawer/drawer";
-import { toggleFavoritesOpen } from "../redux/slices/favoritesSlice";
-import { useDispatch } from "react-redux";
 
 
 export default function App() {
 
   return (
     <div>
-      <SideDrawer />
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -32,10 +29,10 @@ export default function App() {
 }
 
 function NavBar() {
-  const dispatch = useDispatch()
+  const [isOpen, setIsOpen] = React.useState<boolean>(false)
 
   const handleToggleIsOpen = () => {
-    dispatch(toggleFavoritesOpen())
+    setIsOpen(!isOpen)
   }
 
   return (
@@ -63,6 +60,8 @@ function NavBar() {
         <Box style={{color: 'gold', marginRight: 10, marginLeft: -5, position: 'relative', top: 1 }} as={Star} />
         Favorites
       </Button>
+      <SideDrawer isOpen={isOpen} toggleIsOpen={handleToggleIsOpen} />
+
     </Flex>
   );
 }

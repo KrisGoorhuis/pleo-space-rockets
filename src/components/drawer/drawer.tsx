@@ -1,28 +1,24 @@
 import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay } from "@chakra-ui/react"
 import React from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { State } from "../../redux"
-import { toggleFavoritesOpen } from "../../redux/slices/favoritesSlice"
 import DrawerContents from "./drawer-contents"
 
 
 interface SideDrawerProps {
-
+   isOpen: boolean
+   toggleIsOpen: () => void
 }
 
 const SideDrawer = (props: SideDrawerProps) => {
    const btnRef = React.useRef()
-   const dispatch = useDispatch()
-   const isOpen = useSelector((state: State) => state.favorites.favoritesOpen)
 
    const handleToggleIsOpen = () => {
-      dispatch(toggleFavoritesOpen())
+      props.toggleIsOpen()
    }
 
    return (
       <>
          <Drawer
-            isOpen={isOpen}
+            isOpen={props.isOpen}
             placement="right"
             onClose={handleToggleIsOpen}
             finalFocusRef={btnRef.current}

@@ -1,40 +1,50 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Launch, LaunchPad } from "../../model"
+import { Launch, LaunchPad, LocalStorageKeys } from "../../model"
 
 
 interface FavoritesDataSlice {
-   favoritesOpen: boolean
    favoriteLaunches: Launch[] // flight_number, ex 1
    favoriteLaunchPads: LaunchPad[] // site_id, ex 'vafb_slc_4e'
 }
 
 const initialBoardDataState: FavoritesDataSlice = {
-   favoritesOpen: false,
-   favoriteLaunches: [],
-   favoriteLaunchPads: [],
+   favoriteLaunches: JSON.parse(localStorage.getItem(LocalStorageKeys.favoriteLaunches) || "[]"),
+   favoriteLaunchPads: JSON.parse(localStorage.getItem(LocalStorageKeys.favoriteLaunchPads) || "[]"),
 }
 
 const favoritesSlice = createSlice({
    name: "FavoritesSlice",
    initialState: initialBoardDataState,
    reducers: {
-      toggleFavoritesOpen: (state) => { state.favoritesOpen = !state.favoritesOpen },
+      addToFavoriteLaunches: (state, { payload }: PayloadAction<Launch>) => {
+         const newState = [...state.favoriteLaunches, payload]
 
-      addToFavoriteLaunches: (state, { payload }: PayloadAction<Launch>) => { state.favoriteLaunches.push(payload) },
+         localStorage.setItem(LocalStorageKeys.favoriteLaunches, JSON.stringify(newState))
+         state.favoriteLaunches = newState
+      },
       removeFromFavoriteLaunches: (state, { payload }: PayloadAction<Launch>) => {
-         state.favoriteLaunches = state.favoriteLaunches.filter((launch: Launch) => payload.flight_number !== launch.flight_number)
+         const newState = state.favoriteLaunches.filter((launch: Launch) => payload.flight_number !== launch.flight_number)
+
+         localStorage.setItem(LocalStorageKeys.favoriteLaunches, JSON.stringify(newState))
+         state.favoriteLaunches = newState
       },
 
-      addToFavoriteLaunchPads: (state, { payload }: PayloadAction<LaunchPad>) => { state.favoriteLaunchPads.push(payload) },
+      addToFavoriteLaunchPads: (state, { payload }: PayloadAction<LaunchPad>) => {
+         const newState = [...state.favoriteLaunchPads, payload]
+
+         localStorage.setItem(LocalStorageKeys.favoriteLaunchPads, JSON.stringify(newState))
+         state.favoriteLaunchPads = newState
+      },
       removeFromFavoriteLaunchPads: (state, { payload }: PayloadAction<LaunchPad>) => {
-         state.favoriteLaunchPads = state.favoriteLaunchPads.filter((launchPad: LaunchPad) => payload.site_id !== launchPad.site_id)
+         const newState = state.favoriteLaunchPads.filter((launchPad: LaunchPad) => payload.site_id !== launchPad.site_id)
+
+         localStorage.setItem(LocalStorageKeys.favoriteLaunchPads, JSON.stringify(newState))
+         state.favoriteLaunchPads = newState
       },
    },
 })
 
 export const {
-   toggleFavoritesOpen,
-
    addToFavoriteLaunches,
    removeFromFavoriteLaunches,
 

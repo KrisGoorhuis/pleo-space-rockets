@@ -6,6 +6,7 @@
 - Refactored app with Typescript
    - Updated Chakra UI/dependencies for better TS support (a la https://chakra-ui.com/docs/migration)
    - Added @types/react-router-dom, updated react-router-dom
+- Fixed an issue where launch datetimes displayed the user's time zone rather than the launch's time zone as intended. The user's time zone is instead displayed in tooltip. 
 - Added testing to network requests (TODO)
    - Added react-testing-library (@testing-library/react)
    - @types/jest
@@ -79,3 +80,13 @@ There are still `any` types here and there. The
 ## Drawer
 Confirmation on removal because it's far easier to remove than add back.
 Indent on 'ago' was not intentional, but I decided I liked it for the grayed subtext
+
+
+
+## Bug Fix Notes
+Javascript's vanilla time-related objects are often at least frustrating, so I decided to use Moment.js.
+Additionally, time zones are ticky without being explicitly told - all we have is the time stamp itself (well, also coordinates, but making a
+call to something like Google Maps to determine a time zone for every card would be a bit much.) I decided to show the UTC offset in place of 
+a time zone instead.
+
+Default behavior is to parse time in the user's time zone. Moment's `.parseZone()` will keep the original string's offset intact.

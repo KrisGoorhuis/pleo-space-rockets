@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import { MapPin, Navigation } from "react-feather";
 import {
   Flex,
-  Heading,
-  Badge,
   Stat,
   StatLabel,
   StatNumber,
@@ -17,12 +15,12 @@ import {
   AspectRatio,
 } from "@chakra-ui/react";
 
-import { useSpaceX } from "../../utils/use-space-x";
-import Error from "./../error";
-import Breadcrumbs from "./../breadcrumbs";
-import { Launch, LaunchPad as LaunchPadType, LaunchPadProps } from '../../model/index'
-import { LaunchItem } from "../launches/launchItem";
-
+import { useSpaceX } from "../../../utils/use-space-x";
+import Error from "../../error";
+import Breadcrumbs from "../../breadcrumbs";
+import { Launch, LaunchPad as LaunchPadType, LaunchPadProps } from '../../../model/index'
+import { LaunchItem } from "../../launches/launchItem";
+import LaunchPadHeader from "./launch-pad-header";
 
 
 export default function LaunchPad() {
@@ -46,7 +44,7 @@ export default function LaunchPad() {
   }
 
   return (
-    <div>
+    <>
       <Breadcrumbs
         items={[
           { label: "Home", to: "/" },
@@ -54,7 +52,7 @@ export default function LaunchPad() {
           { label: launchPad.location.name },
         ]}
       />
-      <Header launchPad={launchPad} />
+      <LaunchPadHeader launchPad={launchPad} />
       <Box m={[3, 6]}>
         <LocationAndVehicles launchPad={launchPad} />
         <Text color="gray.700" fontSize={["md", null, "lg"]} my="8">
@@ -68,56 +66,10 @@ export default function LaunchPad() {
         </AspectRatio>
         <RecentLaunches launches={launches || []} />
       </Box>
-    </div>
+    </>
   );
 }
 
-const randomColor = (start = 200, end = 250) =>
-  `hsl(${start + end * Math.random()}, 80%, 90%)`;
-
-function Header(props: { launchPad: LaunchPadType }) {
-  return (
-    <Flex
-      background={`linear-gradient(${randomColor()}, ${randomColor()})`}
-      bgPos="center"
-      bgSize="cover"
-      bgRepeat="no-repeat"
-      minHeight="15vh"
-      position="relative"
-      flexDirection={["column", "row"]}
-      p={[2, 6]}
-      alignItems="flex-end"
-      justifyContent="space-between"
-    >
-      <Heading
-        color="gray.900"
-        display="inline"
-        mx={[2, 4]}
-        my="2"
-        fontSize={["md", "3xl"]}
-        borderRadius="lg"
-      >
-        {props.launchPad.site_name_long}
-        LAUNCH PAD PAGE
-      </Heading>
-      <Stack isInline spacing="3">
-        <Badge colorScheme="purple" fontSize={["sm", "md"]}>
-          {props.launchPad.successful_launches}/{props.launchPad.attempted_launches}{" "}
-          successful
-        </Badge>
-        {props.launchPad.status === "active" ? (
-          <Badge colorScheme="green" fontSize={["sm", "md"]}>
-            Active
-          </Badge>
-        ) : (
-          <Badge colorScheme="red" fontSize={["sm", "md"]}>
-            Retired
-          </Badge>
-        )}
-      </Stack>
-    </Flex>
-  );
-}
 
 function LocationAndVehicles(props: LaunchPadProps) {
   return (

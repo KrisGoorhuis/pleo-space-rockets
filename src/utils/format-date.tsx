@@ -1,4 +1,6 @@
-export function formatDate(timestamp: string | number | Date) {
+import moment from "moment";
+
+export function formatDateSimple(timestamp: string | number | Date) {
   return new Intl.DateTimeFormat("en-US", {
     weekday: "long",
     year: "numeric",
@@ -7,7 +9,13 @@ export function formatDate(timestamp: string | number | Date) {
   }).format(new Date(timestamp));
 }
 
-export function formatDateTime(timestamp: string | number | Date) {
+
+export function formatDateTargetZone(timestamp: string | number | Date) {
+  return moment.parseZone(timestamp).format('MMMM Do YYYY, h:mm:ss A ZZ')
+}
+
+
+export function formatDateLong(timestamp: string | number | Date) {
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
