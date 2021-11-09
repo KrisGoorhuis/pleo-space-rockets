@@ -1,12 +1,7 @@
 import React from "react";
 import { Box, Stat, StatLabel, StatNumber, StatHelpText, StatGroup, SimpleGrid } from "@chakra-ui/react";
 import { Navigation, Layers } from "react-feather";
-import { Launch, LaunchProps } from "../../../model";
-
-
-interface RocketInfoProps {
-   launch: Launch
-}
+import { LaunchProps } from "../../../model";
 
 
 function RocketInfo(props: LaunchProps) {

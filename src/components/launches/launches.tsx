@@ -18,7 +18,6 @@ export default function Launches() {
       sort: "launch_date_utc",
     }
   );
-  console.log(data, error);
   return (
     <div>
       <Breadcrumbs

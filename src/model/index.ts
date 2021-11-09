@@ -2,11 +2,6 @@ import { ExampleLaunch } from "./example-launch";
 import { ExampleLaunchPad } from "./example-launch-pads";
 
 
-export enum LocalStorageKeys {
-   favoriteLaunches = "favoriteLaunches",
-   favoriteLaunchPads = "favoriteLaunchPads"
-}
-
 
 export interface BreadcrumbObject {
    label: string
@@ -23,9 +18,9 @@ export interface LaunchProps {
 
 // Our type cheat doesn't work with empty arrays, so we'll replace 'never[]'
 interface UpdatedLinks extends Omit<typeof ExampleLaunch.links, 'flickr_images'> {
-   flickr_images: string[] 
+   flickr_images: string[]
 }
- 
+
 export interface Launch extends Omit<typeof ExampleLaunch, 'links'> { 'links': UpdatedLinks }
 
 export type LaunchPad = typeof ExampleLaunchPad

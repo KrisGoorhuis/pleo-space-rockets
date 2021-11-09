@@ -4,9 +4,9 @@ interface QueryOptions {
   [x: string]: any // Keys in options dependent upon spacex api endpoint
 }
 
-const fetcher = async (
+export const fetcher = async (
   input: RequestInfo,
-  init: RequestInit,
+  init?: RequestInit,
 ) => {
   const response = await fetch(input, init); // previously '...args' - 
   if (!response.ok) {
@@ -15,13 +15,14 @@ const fetcher = async (
   return await response.json();
 };
 
-function getSpaceXUrl(path: string, options: QueryOptions) { 
+export function getSpaceXUrl(path: string, options: QueryOptions) { 
   const searchParams = new URLSearchParams();
   for (const property in options) {
     searchParams.append(property, options[property]);
   }
 
   const spaceXApiBase = process.env.REACT_APP_SPACEX_API_URL;
+
   return `${spaceXApiBase}${path}?${searchParams.toString()}`;
 }
 
@@ -30,6 +31,7 @@ export function useSpaceX<T>(path: string | null, options = {}) {
   if (path) {
     endpointUrl = getSpaceXUrl(path, options);
   }
+
   return useSWR<T>(endpointUrl, fetcher);
 }
 

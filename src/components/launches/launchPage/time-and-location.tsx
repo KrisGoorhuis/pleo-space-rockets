@@ -5,7 +5,6 @@ import { format as timeAgo } from "timeago.js";
 import { Link as RouterLink } from "react-router-dom";
 
 
-
 import { LaunchProps } from "../../../model";
 import { formatDateLong, formatDateTargetZone } from "../../../utils/format-date";
 
@@ -22,7 +21,7 @@ function TimeAndLocation(props: LaunchProps) {
              Launch Date
            </Box>
          </StatLabel>
-         <StatNumber fontSize={["md", "xl"]} cursor="default" >
+         <StatNumber fontSize={["md", "xl"]} cursor="default" borderBottom="1px dotted black" display="inline-block">
            <Tooltip label={formatDateLong(props.launch.launch_date_local)} aria-label="Local time tooltip">
              {formatDateTargetZone(props.launch.launch_date_local)}
            </Tooltip>

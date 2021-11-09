@@ -2,15 +2,18 @@
 
 # ¡Space·Rockets! Changelog
 
-## v 0.1.1
+## v 0.1.2
 - Refactored app with Typescript
    - Updated Chakra UI/dependencies for better TS support (a la https://chakra-ui.com/docs/migration)
    - Added @types/react-router-dom, updated react-router-dom
-- Fixed an issue where launch datetimes displayed the user's time zone rather than the launch's time zone as intended. The user's time zone is instead displayed in tooltip. 
 - Added testing to network requests (TODO)
    - Added react-testing-library (@testing-library/react)
    - @types/jest
    - @types/testing-library__jest-dom
+
+
+## v 0.1.1
+- Fixed an issue where launch datetimes displayed the user's time zone rather than the launch's time zone as intended. The user's time zone is instead displayed in tooltip. 
 
 
 
@@ -60,17 +63,12 @@ Launches are claimed to have a unique `flight_id`, but none of their examples co
 
 # pleo-space-rockets
 
-launches: flight_id
-pads: site_id
-
 
 
 how might favorites feature be extended?
 
 open to correct favorites - keep track of page in Redux?
 
-
-Are elements within Launch and launch-pads identical? To be taken out?
 
 
 ## Things I'd Do With More Time
@@ -89,4 +87,12 @@ Additionally, time zones are ticky without being explicitly told - all we have i
 call to something like Google Maps to determine a time zone for every card would be a bit much.) I decided to show the UTC offset in place of 
 a time zone instead.
 
-Default behavior is to parse time in the user's time zone. Moment's `.parseZone()` will keep the original string's offset intact.
+Default behavior is to parse time in the user's time zone. Moment's `.parseZone()` will keep the original string's offset intact. The underline was the best way I could think of to suggest that it's hoverable.
+
+
+## Testing
+npm run test -- --silent=false
+
+
+## Lessons & Learnings
+I hadn't thought about pagination before. 

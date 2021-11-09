@@ -20,7 +20,7 @@ export function LaunchItem(props: LaunchItemProps) {
          as={Link}
          to={`/launches/${props.launch.flight_number.toString()}`}
          boxShadow="md"
-         borderWidth={ props.isDrawerFavorite ? 0 : "1px"}
+         borderWidth={props.isDrawerFavorite ? 0 : "1px"}
          rounded="lg"
          overflow="hidden"
          position="relative"
@@ -73,7 +73,7 @@ export function LaunchItem(props: LaunchItemProps) {
                      {props.launch.rocket.rocket_name} &bull; {props.launch.launch_site.site_name}
                   </Box>
                </Box>
-              <FavoriteLaunchButton {...props} />
+               <FavoriteLaunchButton {...props} />
             </Box>
             <Box
                mt="1"
