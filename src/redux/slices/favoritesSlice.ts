@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Launch, LaunchPad, LocalStorageKeys } from "../../model"
+import { Launch, LaunchPad } from "../../model"
+import { LocalStorageKeys } from "../../model/constants"
 
 
 interface FavoritesDataSlice {

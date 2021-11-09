@@ -17,11 +17,18 @@ export const fetcher = async (
 
 export function getSpaceXUrl(path: string, options: QueryOptions) { 
   const searchParams = new URLSearchParams();
+  console.log("options")
+  console.log(options)
+  console.log("searchParams")
+  console.log(searchParams.toString())
   for (const property in options) {
     searchParams.append(property, options[property]);
   }
-
+  console.log("searchParams")
+  console.log(searchParams.toString())
   const spaceXApiBase = process.env.REACT_APP_SPACEX_API_URL;
+  console.log("${spaceXApiBase}${path}?${searchParams.toString()}")
+  console.log(`${spaceXApiBase}${path}?${searchParams.toString()}`)
 
   return `${spaceXApiBase}${path}?${searchParams.toString()}`;
 }
