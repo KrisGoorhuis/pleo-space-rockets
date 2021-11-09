@@ -17,19 +17,10 @@ export const fetcher = async (
 
 export function getSpaceXUrl(path: string, options: QueryOptions) { 
   const searchParams = new URLSearchParams();
-  console.log("options")
-  console.log(options)
-  console.log("searchParams")
-  console.log(searchParams.toString())
   for (const property in options) {
     searchParams.append(property, options[property]);
   }
-  console.log("searchParams")
-  console.log(searchParams.toString())
   const spaceXApiBase = process.env.REACT_APP_SPACEX_API_URL;
-  console.log("${spaceXApiBase}${path}?${searchParams.toString()}")
-  console.log(`${spaceXApiBase}${path}?${searchParams.toString()}`)
-
   return `${spaceXApiBase}${path}?${searchParams.toString()}`;
 }
 
@@ -38,13 +29,14 @@ export function useSpaceX<T>(path: string | null, options = {}) {
   if (path) {
     endpointUrl = getSpaceXUrl(path, options);
   }
-
+  // console.log("useSWR<T>(endpointUrl, fetcher)")
+  // console.log(useSWR<T>(endpointUrl, fetcher))
   return useSWR<T>(endpointUrl, fetcher);
 }
 
 export function useSpaceXPaginated<T>(path: string, options: QueryOptions) {
-  return useSWRInfinite((pageIndex, previousPageData) => {
-    if (previousPageData && !previousPageData.length) {
+  return useSWRInfinite<T>((pageIndex, previousPageData) => {
+    if (previousPageData && !(previousPageData as any).length) {
       return null;
     }
     return getSpaceXUrl(path, {

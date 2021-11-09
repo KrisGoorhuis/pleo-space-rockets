@@ -2,14 +2,14 @@
 
 # ¡Space·Rockets! Changelog
 
-## v 0.1.2
-- Refactored app with Typescript
+## v 0.2.0
+- Refactored the app with Typescript
    - Updated Chakra UI/dependencies for better TS support (a la https://chakra-ui.com/docs/migration)
    - Added @types/react-router-dom, updated react-router-dom
-- Added testing to network requests (TODO)
-   - Added react-testing-library (@testing-library/react)
-   - @types/jest
-   - @types/testing-library__jest-dom
+- Added testing to network request utilities
+   - @types/jest, jest-fetch-mock added to dependencies
+- Added Favorites functionality for launches and launch pads - items can be collected in a side drawer via click of a star
+   - Added Redux (Toolkit) to keep track
 
 
 ## v 0.1.1
@@ -17,23 +17,16 @@
 
 
 
-
-## Additional Technologies
-
-
 ## Updates
 ### Typescript! 
 
-Updating Chakra was the first step, as TS support has improved with 1.0. I followed the steps documented at https://chakra-ui.com/docs/migration
+Updating Chakra was the first step, as TS support was improved with 1.0. I followed the steps documented at https://chakra-ui.com/docs/migration
 Some components and the theme provider had their names changed. Some find and replace.
 
+Next was updating utilities to pass type parameters to the imports they used, and in turn updated these utilities to accept the type parameters they needed to use.
+For example, useParams() from react-routerDom and useSWR() are now receiving types
 
-Next was updating utilities to pass type parameters to the imports they used, and in turn update these utilities to accept the type parameters they needed to use.
-For example, useParams() from react-routerDom and useSWR() are now taking types
-
-I also added @types/react-router-dom to bring in some missing types.
-
-The types associated with data returned from spacexdata.com were built with a little bit of cheating. 
+The types associated with data returned from spacexdata.com were built with a little bit of `typeof` cheating. 
 The launch pad object in particular is huge, so converting it to a hard type by hand would take a fair bit of time.
 
 framer-motion, which came with the Chakra update, required a webpack config update. The following was added to the rules in node_modules\react-scripts\config\webpack.config.js:
@@ -62,8 +55,6 @@ Launches are claimed to have a unique `flight_id`, but none of their examples co
 
 
 # pleo-space-rockets
-
-
 
 how might favorites feature be extended?
 

@@ -6,11 +6,12 @@ import Error from "../error";
 import Breadcrumbs from "../breadcrumbs";
 import LoadMoreButton from "../load-more-button";
 import { LaunchItem } from "./launchItem";
+import { Launch } from "../../model";
 
 const PAGE_SIZE = 12;
 
 export default function Launches() {
-  const { data, error, isValidating, setSize, size } = useSpaceXPaginated(
+  const { data, error, isValidating, setSize, size } = useSpaceXPaginated<Launch>(
     "/launches/past",
     {
       limit: PAGE_SIZE,
@@ -18,6 +19,7 @@ export default function Launches() {
       sort: "launch_date_utc",
     }
   );
+  
   return (
     <div>
       <Breadcrumbs

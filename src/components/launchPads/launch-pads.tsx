@@ -6,13 +6,12 @@ import Breadcrumbs from "../breadcrumbs";
 import LoadMoreButton from "../load-more-button";
 import { useSpaceXPaginated } from "../../utils/use-space-x";
 import LaunchPadItem from "./launchPadItem";
+import { LaunchPad } from "../../model";
 
 const PAGE_SIZE = 12;
 
-
-
 export default function LaunchPads() {
-  const { data, error, isValidating, size, setSize } = useSpaceXPaginated(
+  const { data, error, isValidating, size, setSize } = useSpaceXPaginated<LaunchPad>(
     "/launchpads",
     {
       limit: PAGE_SIZE,
