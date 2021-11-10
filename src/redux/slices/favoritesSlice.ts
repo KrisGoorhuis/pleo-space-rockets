@@ -3,19 +3,19 @@ import { Launch, LaunchPad } from "../../model"
 import { LocalStorageKeys } from "../../model/constants"
 
 
-interface FavoritesDataSlice {
+export interface FavoritesDataSlice {
    favoriteLaunches: Launch[] // flight_number, ex 1
    favoriteLaunchPads: LaunchPad[] // site_id, ex 'vafb_slc_4e'
 }
 
-const initialBoardDataState: FavoritesDataSlice = {
+export const initialFavoritesState: FavoritesDataSlice = {
    favoriteLaunches: JSON.parse(localStorage.getItem(LocalStorageKeys.favoriteLaunches) || "[]"),
    favoriteLaunchPads: JSON.parse(localStorage.getItem(LocalStorageKeys.favoriteLaunchPads) || "[]"),
 }
 
 const favoritesSlice = createSlice({
    name: "FavoritesSlice",
-   initialState: initialBoardDataState,
+   initialState: initialFavoritesState,
    reducers: {
       addToFavoriteLaunches: (state, { payload }: PayloadAction<Launch>) => {
          const newState = [...state.favoriteLaunches, payload]
