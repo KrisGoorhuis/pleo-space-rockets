@@ -8,13 +8,13 @@ import { useSpaceXPaginated } from "../../utils/use-space-x";
 import LaunchPadItem from "./launchPadItem";
 import { LaunchPad } from "../../model";
 
-const PAGE_SIZE = 12;
+export const LAUNCH_PADS_PAGE_SIZE = 12;
 
 export default function LaunchPads() {
   const { data, error, isValidating, size, setSize } = useSpaceXPaginated<LaunchPad>(
     "/launchpads",
     {
-      limit: PAGE_SIZE,
+      limit: LAUNCH_PADS_PAGE_SIZE,
     }
   );
 
@@ -23,7 +23,7 @@ export default function LaunchPads() {
       <Breadcrumbs
         items={[{ label: "Home", to: "/" }, { label: "Launch Pads" }]}
       />
-      <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
+      <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4" data-testid="launchPadItem">
         {error && <Error />}
         {data &&
           data
@@ -35,7 +35,7 @@ export default function LaunchPads() {
       <LoadMoreButton
         loadMore={() => size && setSize && setSize(size + 1)}
         data={data}
-        pageSize={PAGE_SIZE}
+        pageSize={LAUNCH_PADS_PAGE_SIZE}
         isLoadingMore={isValidating}
       />
     </div>

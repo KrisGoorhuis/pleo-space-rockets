@@ -3,8 +3,6 @@ import { ExampleLaunchPad } from '../../model/example-launch-pads'
 import slice, { addToFavoriteLaunches, addToFavoriteLaunchPads, FavoritesDataSlice, initialFavoritesState } from './favoritesSlice'
 
 
-
-
 test('should return the initial state', () => {
    expect(slice.reducer(undefined, { type: '' })).toEqual(initialFavoritesState)
 })

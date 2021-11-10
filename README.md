@@ -17,7 +17,7 @@
 
 
 
-## Updates
+## Notes
 ### Typescript! 
 
 Updating Chakra was the first step, as TS support was improved with 1.0. I followed the steps documented at https://chakra-ui.com/docs/migration
@@ -63,7 +63,9 @@ open to correct favorites - keep track of page in Redux?
 
 
 ## Things I'd Do With More Time
-There are still `any` types here and there. The 
+There are still `any` types here and there. Most are event types, but with more time and effort some of the others could be done away with.
+
+Calling additional pieces of the spacex API would be a straightforward bonus, but I settled for 
 
 
 ## Drawer
@@ -71,19 +73,28 @@ Confirmation on removal because it's far easier to remove than add back.
 Indent on 'ago' was not intentional, but I decided I liked it for the grayed subtext
 
 
-
 ## Bug Fix Notes
-Javascript's vanilla time-related objects are often at least frustrating, so I decided to use Moment.js.
-Additionally, time zones are ticky without being explicitly told - all we have is the time stamp itself (well, also coordinates, but making a
+Javascript's vanilla time-related objects are often at least a little frustrating, so I decided to use Moment.js.
+Additionally, time zones are ticky without being explicitly told - all we have is the time stamp itself (well, and coordinates, but making a
 call to something like Google Maps to determine a time zone for every card would be a bit much.) I decided to show the UTC offset in place of 
 a time zone instead.
 
-Default behavior is to parse time in the user's time zone. Moment's `.parseZone()` will keep the original string's offset intact. The underline was the best way I could think of to suggest that it's hoverable.
+Default behavior is to parse time in the user's time zone. Moment's `.parseZone()` will keep the original string's offset intact. Adding an underline was the best method of suggesting that something is hoverable.
 
 
 ## Testing
 npm run test -- --silent=false
 
+The question of *what* to test seems eternal. This is something I expect to better be able to figure out as experience comes, but for now, I have three ideas: network requests, conditional rendering, and state updates.
+
+Network requests were tested with mocked responses. Swr was new technology to me and, while very cool, it was a conundrum to test. Google's suggestion was to just address the fetch itself, but while actual network requests may be more reliable, if breakable by somebody else, that's perhaps too large a load.
+
+The Redux tests were fairly straightforward, as there isn't a lot of complicated logic there. Call a reducer, examine the new state, and try to cover everything.
+
+The most vague part was deciding which parts of the React components themselves would benefit. For the time being, all tests regard conditional rendering.
+
 
 ## Lessons & Learnings
-I hadn't thought about pagination before. 
+Swr was an interesting thing to discover. Some don't like the proliferation of packages, but from my perspective, it's more and more of the potentially tricky best practices being rolled into relatively easy to learn tools. I've handled parts of what it does, like Suspense, with loading-handling components, but there's a lot left to benefit from. It may become a standard part of what I use.
+
+The biggest takewaway may be about pagination. I hadn't had occasion to think about it before, but it's a big win for the right app.
