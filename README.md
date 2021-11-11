@@ -43,32 +43,26 @@ The launch pad object in particular is huge, so converting it to a hard type by 
 There were a few other small updates, such as removing the "alt" from a Chakra element appearing as an iframe.
 Reconfiguring and refactoring in response to this switch was the most difficult part of the project. Lots of time spent doing something other than writing code.
 
+
 ## Testing
 The question of *what* to test seems eternal. This is something I expect to better be able to figure out as experience comes, but for now, I had three ideas: network requests, conditional rendering, and state updates.
 
-Network requests were tested with mocked responses. Swr was new technology to me and, while very cool, it was a conundrum to test. Google's suggestion was to just address the fetch itself, but while actual network requests in tests may be more reliable, if breakable by somebody else, that might be a bit much.
+Network requests were tested with mocked responses. Swr was new technology to me and, while very cool, it was a conundrum to test. Google's suggestion was to just address the fetch itself, but while actual network requests in tests may be more reliable, if breakable by somebody else, that might be a bit much. This involved bringing in `jest-fetch-mock`.
 
 The Redux tests were fairly straightforward, as there isn't a lot of complicated logic there. Call a reducer, examine the new state, and try to cover everything.
 
-The most difficult part was deciding which parts of the React components themselves would benefit. For the time being, all tests regard conditional rendering.
+The most difficult part was deciding which parts of the React components themselves would benefit. For the time being, all tests regard conditional rendering and mapping of children. This involved setting up redux-mock-store and, through debugging, adding the `--env=jest-environment-jsdom-sixteen` flag to the test script ('MutationObserver is not a constructor').
 
-I wanted to test the rendering of child elements in the `launch-pads` and `launches` components, which I would normally expect to involve passing items to map through as props. But how do I do this when data arrives through a hook with SRW?
-
-It's difficult to know what can be tested without, it feels like, reading through a library's encyclopedia.
-
-npm run test -- --silent=false
 
 ### Other Updates
 - The logo was made into a home button.
 - Several large component files were split into separate pieces. Small components were left with their parent, but anything larger than a couple dozen lines was separated.
 
 
-
 ## Things I'd Do With More Time
 There are still `any` types here and there. Most are intractible event types, but with more time and effort some of the others could likely done away with.
 
 Calling additional pieces of the spacex API would be a straightforward bonus, but I like to believe I aimed for difficult enhancements of substance instead of just *more*. 
-
 
 
 # Task Notes

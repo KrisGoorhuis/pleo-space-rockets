@@ -17,6 +17,7 @@ export function LaunchItem(props: LaunchItemProps) {
 
    return (
       <Box
+         data-testid={"launchItem"}
          as={Link}
          to={`/launches/${props.launch.flight_number.toString()}`}
          boxShadow="md"
@@ -94,3 +95,5 @@ export function LaunchItem(props: LaunchItemProps) {
       </Box>
    );
 }
+
+export default LaunchItem

@@ -7,8 +7,6 @@ import LoadMoreButton from "../load-more-button";
 import { useSpaceXPaginated } from "../../utils/use-space-x";
 import LaunchPadItem from "./launchPadItem";
 import { LaunchPad } from "../../model";
-import { Provider } from 'react-redux'
-
 
 
 const LAUNCH_PADS_PAGE_SIZE = 12;
@@ -31,7 +29,7 @@ export default function LaunchPads() {
         {data &&
           data
             .flat()
-            .map((launchPad, i) => (
+            .map((launchPad, i) => ( // Key change used for testing purposes
               <LaunchPadItem key={launchPad.site_id + i} launchPad={launchPad} />
             ))}
       </SimpleGrid>

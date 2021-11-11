@@ -1,5 +1,5 @@
 import { ExampleLaunch } from '../../model/example-launch'
-import { ExampleLaunchPad } from '../../model/example-launch-pads'
+import { ExampleLaunchPad } from '../../model/example-launch-pad'
 import slice, { addToFavoriteLaunches, addToFavoriteLaunchPads, FavoritesDataSlice, initialFavoritesState } from './favoritesSlice'
 
 

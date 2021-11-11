@@ -10,7 +10,6 @@ interface launchPadItemProps extends LaunchPadProps {
 
 const LaunchPadItem = (props: launchPadItemProps) => {
 
-
   return (
     <Box
       data-testid="launchPadItem"

@@ -8,6 +8,7 @@ import LoadMoreButton from "../load-more-button";
 import { LaunchItem } from "./launchItem";
 import { Launch } from "../../model";
 
+
 const PAGE_SIZE = 12;
 
 export default function Launches() {
@@ -30,8 +31,8 @@ export default function Launches() {
         {data &&
           data
             .flat()
-            .map((launch) => (
-              <LaunchItem launch={launch} key={launch.flight_number} />
+            .map((launch, i) => ( // Key change used for testing purposes
+              <LaunchItem launch={launch} key={launch.flight_number + i} />
             ))}
       </SimpleGrid>
       <LoadMoreButton

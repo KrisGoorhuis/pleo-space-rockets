@@ -5,52 +5,38 @@ import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import LaunchPads from './launch-pads';
-import { ExampleLaunchPad } from '../../model/example-launch-pads';
+import { ExampleLaunch } from '../../../model/example-launch';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store'
-import { initialFavoritesState } from '../../redux/slices/favoritesSlice';
+import { initialFavoritesState } from '../../../redux/slices/favoritesSlice';
+import Launches from './../launches';
 
-
-// const ReduxProvider = ({ children, reduxStore }: any) => (
-//    <Provider store={reduxStore}>{children}</Provider>
-// )
-
-// jest.mock('react-redux', () => {
-//    const ActualReactRedux = jest.requireActual('react-redux');
-//    return {
-//       ...ActualReactRedux,
-//       useSelector: jest.fn().mockImplementation(() => {
-//          return {};
-//       }),
-//    };
-// });
 
 beforeEach(() => {
    fetch.resetMocks();
 });
 
 
-describe('<LaunchPads />', () => {
-   const initialState = {favorites: {...initialFavoritesState, favoriteLaunchPads: [ExampleLaunchPad, ExampleLaunchPad]}}
+describe('<Launches />', () => {
+   const initialState = { favorites: initialFavoritesState}
    const mockStore = configureStore()
    let store
 
    it('renders three <LaunchPadItem /> components', async () => {
-       store = mockStore(initialState)
+      store = mockStore(initialState)
 
-      fetch.mockResponseOnce(JSON.stringify([ExampleLaunchPad, ExampleLaunchPad, ExampleLaunchPad]))
+      fetch.mockResponseOnce(JSON.stringify([ExampleLaunch, ExampleLaunch, ExampleLaunch]))
 
       // BrowserRouter solves 'useHref() may be used only in the context of a <Router> component.'
       render(
          <Provider store={store}>
-            <BrowserRouter> 
-               <LaunchPads />
+            <BrowserRouter>
+               <Launches />
             </BrowserRouter>
          </Provider>
       );
 
-      await waitFor(() => expect(screen.getAllByTestId('launchPadItem')).toHaveLength(3))
+      await waitFor(() => expect(screen.getAllByTestId('launchItem')).toHaveLength(3))
    });
 
    //   it('renders an `.icon-star`', () => {

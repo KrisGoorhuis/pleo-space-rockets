@@ -1,5 +1,5 @@
 import { ExampleLaunch } from "./example-launch";
-import { ExampleLaunchPad } from "./example-launch-pads";
+import { ExampleLaunchPad } from "./example-launch-pad";
 
 
 export interface BreadcrumbObject {

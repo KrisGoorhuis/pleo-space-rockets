@@ -3,7 +3,7 @@ enableFetchMocks()
 import fetch from 'jest-fetch-mock';
 import { ExampleLaunch } from '../model/example-launch';
 import { fetcher, getSpaceXUrl } from './use-space-x'
-import { ExampleLaunchPad } from '../model/example-launch-pads';
+import { ExampleLaunchPad } from '../model/example-launch-pad';
 
 beforeEach(() => {
   fetch.resetMocks();
