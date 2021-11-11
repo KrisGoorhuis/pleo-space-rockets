@@ -23,18 +23,24 @@ export default function Launches() {
 
   console.log("data")
   console.log(data)
-  
+
   return (
     <div>
       <Breadcrumbs
         items={[{ label: "Home", to: "/" }, { label: "Launches" }]}
       />
       {/* <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4"> */}
-      <div >
-        {data &&
-          data.map((launch, i) => ( // Key change used for testing purposes
-              <LaunchItem launch={launch} key={launch.flight_number + i} />
-            ))}
+      <div>
+        {[1, 2, 3, 4, 5].map((launch, i) => {
+          console.log("This was actually found")
+          return ( // Key change used for testing purposes
+            <div>
+              Text
+            </div>
+          )
+        })
+        }
+
       </div>
       <div >
         {error && <Error />}
