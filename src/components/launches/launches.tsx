@@ -2,7 +2,7 @@ import React from "react";
 // import { SimpleGrid } from "@chakra-ui/react";
 
 import { useSpaceXPaginated } from "../../utils/use-space-x";
-import Error from "../error";
+// import Error from "../error";
 import Breadcrumbs from "../breadcrumbs";
 import LoadMoreButton from "../load-more-button";
 import { LaunchItem } from "./launchItem";
@@ -12,7 +12,8 @@ import { Launch } from "../../model";
 const PAGE_SIZE = 12;
 
 export default function Launches() {
-  const { data, error, isValidating, setSize, size } = useSpaceXPaginated<Launch>(
+  // const { data, error, isValidating, setSize, size } = useSpaceXPaginated<Launch>(
+  const { data, isValidating, setSize, size } = useSpaceXPaginated<Launch>(
     "/launches/past",
     {
       limit: PAGE_SIZE,
@@ -59,7 +60,7 @@ export default function Launches() {
   const MyComponent3 = () => {
     return (
       <div>
-        {(data || [1,2,3]).map((launch, i) => {
+        {(data || [1,2,3]).map(() => {
           console.log("This ran")
           return ( // Key change used for testing purposes
             <div>
