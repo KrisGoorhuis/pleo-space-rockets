@@ -29,7 +29,8 @@ export default function Launches() {
       <Breadcrumbs
         items={[{ label: "Home", to: "/" }, { label: "Launches" }]}
       />
-      <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
+      {/* <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4"> */}
+      <div >
         {error && <Error />}
         {data &&
           data
@@ -37,7 +38,7 @@ export default function Launches() {
             .map((launch, i) => ( // Key change used for testing purposes
               <LaunchItem launch={launch} key={launch.flight_number + i} />
             ))}
-      </SimpleGrid>
+      </div>
       <LoadMoreButton
         loadMore={() => size && setSize && setSize(size + 1)}
         data={data}
