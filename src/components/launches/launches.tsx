@@ -30,7 +30,7 @@ export default function Launches() {
       <div>
         {
           array.map(item => {
-            <div>things</div>
+            return (<div>things</div>)
           })
 
         }
