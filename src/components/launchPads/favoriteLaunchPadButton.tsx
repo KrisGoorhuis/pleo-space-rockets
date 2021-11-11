@@ -15,10 +15,19 @@ interface FavoriteLaunchPadButtonProps {
 const FavoriteLaunchPadButton = (props: FavoriteLaunchPadButtonProps) => {
    const dispatch = useDispatch()
    const [confirming, setConfirming] = React.useState<boolean>(false)
- 
-   const favoriteLaunchPads = useSelector((state: State) => state.favorites.favoriteLaunchPads)
+   
+
+   const state = useSelector((state: State) => state)
+   console.log("state")
+   console.log(state)
+   const statefavorites = useSelector((state: State) => state.favorites)
+   console.log("state.favorites")
+   console.log(state.favorites)
+   const statefavoritesPads = useSelector((state: State) => state.favorites.favoriteLaunchPads)
+   console.log("state.favorites.favoriteLaunchPads")
+   console.log(state.favorites.favoriteLaunchPads)
+   const favoriteLaunchPads = useSelector((state: State) => state?.favorites?.favoriteLaunchPads)
    const isFavorited = favoriteLaunchPads.filter((launch: LaunchPad) => launch.site_id === props.launchPad.site_id).includes(props.launchPad)
-  
   
    const toggleFavorite = () => {
       if (isFavorited) {
@@ -44,8 +53,6 @@ const FavoriteLaunchPadButton = (props: FavoriteLaunchPadButtonProps) => {
       setConfirming(false)
    }
  
- 
-   
    return (
       <Box marginLeft="10px">
       {

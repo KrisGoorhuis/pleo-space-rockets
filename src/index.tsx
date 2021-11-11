@@ -12,7 +12,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Provider store={store}>
-
         <ChakraProvider>
           <CSSReset />
           <App />

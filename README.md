@@ -17,7 +17,10 @@
 
 
 
-## Notes
+# Notes
+
+## Updates
+
 ### Typescript! 
 
 Updating Chakra was the first step, as TS support was improved with 1.0. I followed the steps documented at https://chakra-ui.com/docs/migration
@@ -27,9 +30,9 @@ Next was updating utilities to pass type parameters to the imports they used, an
 For example, useParams() from react-routerDom and useSWR() are now receiving types
 
 The types associated with data returned from spacexdata.com were built with a little bit of `typeof` cheating. 
-The launch pad object in particular is huge, so converting it to a hard type by hand would take a fair bit of time.
+The launch pad object in particular is huge, so converting it to a hard type by hand would take a fair bit of time. I'd do this for production, but this method came with bonus overlap with testing.
 
-framer-motion, which came with the Chakra update, required a webpack config update. The following was added to the rules in node_modules\react-scripts\config\webpack.config.js:
+`framer-motion`, which came with the Chakra update, required a webpack config update relating to a `.mjs` file. Frustratingly, the following needed to be re-added to the rules in node_modules\react-scripts\config\webpack.config.js several times:
 
    {
       type: 'javascript/auto',
@@ -37,43 +40,51 @@ framer-motion, which came with the Chakra update, required a webpack config upda
       use: []
    },
 
-There were a few other small updates, such as removing the "alt" from a Chakra element appearing as an iframe
+There were a few other small updates, such as removing the "alt" from a Chakra element appearing as an iframe.
+Reconfiguring and refactoring in response to this switch was the most difficult part of the project. Lots of time spent doing something other than writing code.
 
+## Testing
+The question of *what* to test seems eternal. This is something I expect to better be able to figure out as experience comes, but for now, I had three ideas: network requests, conditional rendering, and state updates.
+
+Network requests were tested with mocked responses. Swr was new technology to me and, while very cool, it was a conundrum to test. Google's suggestion was to just address the fetch itself, but while actual network requests in tests may be more reliable, if breakable by somebody else, that might be a bit much.
+
+The Redux tests were fairly straightforward, as there isn't a lot of complicated logic there. Call a reducer, examine the new state, and try to cover everything.
+
+The most difficult part was deciding which parts of the React components themselves would benefit. For the time being, all tests regard conditional rendering.
+
+I wanted to test the rendering of child elements in the `launch-pads` and `launches` components, which I would normally expect to involve passing items to map through as props. But how do I do this when data arrives through a hook with SRW?
+
+It's difficult to know what can be tested without, it feels like, reading through a library's encyclopedia.
+
+npm run test -- --silent=false
 
 ### Other Updates
-Made the logo a home button
-
-btnRef changed to btnRef.current
-
-
-Moved some large components to new files, collapsed some very small components into just regular code (Maps in launch-pad-page)
-
-
-
-## API Notes
-Launches are claimed to have a unique `flight_id`, but none of their examples contained as much. I decided to use flight_number as a best alternative, to find that that's what is used as a key in `launch-pad.tsx`.
-
-
-# pleo-space-rockets
-
-how might favorites feature be extended?
-
-open to correct favorites - keep track of page in Redux?
+- The logo was made into a home button.
+- Several large component files were split into separate pieces. Small components were left with their parent, but anything larger than a couple dozen lines was separated.
 
 
 
 ## Things I'd Do With More Time
-There are still `any` types here and there. Most are event types, but with more time and effort some of the others could be done away with.
+There are still `any` types here and there. Most are intractible event types, but with more time and effort some of the others could likely done away with.
 
-Calling additional pieces of the spacex API would be a straightforward bonus, but I settled for 
+Calling additional pieces of the spacex API would be a straightforward bonus, but I like to believe I aimed for difficult enhancements of substance instead of just *more*. 
 
+
+
+# Task Notes
 
 ## Drawer
-Confirmation on removal because it's far easier to remove than add back.
-Indent on 'ago' was not intentional, but I decided I liked it for the grayed subtext
+Redux was added to keep track of favorites. Uneccessary if we're just using local storage for now, but following the logic of preparation over just getting things done, it felt like a reasonable add. And I like writing Toolkit slices. Persisting data just occurs in the reducers.
+
+Saving something to favorites or removing it from its non-drawer card are a single click, but they can feel like they're vanishing into the ether when removed from the drawer. A confirmation prompt was added because the potential negative consequences were greater.
+Indent on 'ago' was not intentional, but I decided I liked it for the grayed subtext.
+
+Documentation claims that launches have a unique `flight_id`, but none of their examples contained as much. For Redux reducer logic I decided to use `flight_number` as a best alternative, to find that that's what was already used as a key in `launch-pad.tsx`. 
+
+At the risk of overengineering, the app keeps track of which accordion of favorites was last opened.
 
 
-## Bug Fix Notes
+## Bug Fix
 Javascript's vanilla time-related objects are often at least a little frustrating, so I decided to use Moment.js.
 Additionally, time zones are ticky without being explicitly told - all we have is the time stamp itself (well, and coordinates, but making a
 call to something like Google Maps to determine a time zone for every card would be a bit much.) I decided to show the UTC offset in place of 
@@ -82,19 +93,17 @@ a time zone instead.
 Default behavior is to parse time in the user's time zone. Moment's `.parseZone()` will keep the original string's offset intact. Adding an underline was the best method of suggesting that something is hoverable.
 
 
-## Testing
-npm run test -- --silent=false
 
-The question of *what* to test seems eternal. This is something I expect to better be able to figure out as experience comes, but for now, I have three ideas: network requests, conditional rendering, and state updates.
+# Lessons, Learnings
+Swr was an interesting thing to discover. Some don't like the proliferation of packages in web dev, but from my perspective, it's more and more of the potentially tricky best practices being rolled into relatively easy to learn tools. I've handled parts of what swr does, like imitating Suspense's function with loading-handling components, but there's a lot left to benefit from. It may become a standard part of what I use.
 
-Network requests were tested with mocked responses. Swr was new technology to me and, while very cool, it was a conundrum to test. Google's suggestion was to just address the fetch itself, but while actual network requests may be more reliable, if breakable by somebody else, that's perhaps too large a load.
+I hadn't had occasion to think about pagination beyond awareness before, but it's a big win for the right app. And a package makes it simple!
 
-The Redux tests were fairly straightforward, as there isn't a lot of complicated logic there. Call a reducer, examine the new state, and try to cover everything.
-
-The most vague part was deciding which parts of the React components themselves would benefit. For the time being, all tests regard conditional rendering.
+Configuration isn't terribly fun, but it's something you can *just be done with* and continue building, for the most part. 
 
 
-## Lessons & Learnings
-Swr was an interesting thing to discover. Some don't like the proliferation of packages, but from my perspective, it's more and more of the potentially tricky best practices being rolled into relatively easy to learn tools. I've handled parts of what it does, like Suspense, with loading-handling components, but there's a lot left to benefit from. It may become a standard part of what I use.
 
-The biggest takewaway may be about pagination. I hadn't had occasion to think about it before, but it's a big win for the right app.
+# pleo-space-rockets TODO
+
+open to correct favorites - keep track of page in Redux?
+

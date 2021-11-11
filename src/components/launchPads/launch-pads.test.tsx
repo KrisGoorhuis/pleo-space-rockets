@@ -1,31 +1,56 @@
-import { render, screen } from '@testing-library/react';
+import { enableFetchMocks } from 'jest-fetch-mock'
+enableFetchMocks()
+import fetch from 'jest-fetch-mock';
+import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import LaunchPads, { LAUNCH_PADS_PAGE_SIZE } from './launch-pads';
-import LaunchPadItem from './launchPadItem';
+import LaunchPads from './launch-pads';
+import { ExampleLaunchPad } from '../../model/example-launch-pads';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store'
+import { initialFavoritesState } from '../../redux/slices/favoritesSlice';
 
-describe('<MyComponent />', () => {
-   it('renders three <LaunchPadItem /> components', () => {
-      render(<BrowserRouter><LaunchPads /></BrowserRouter>);
-      const selected = screen.queryByTestId('launchPadItem')
 
-      console.log("selected")
-      console.log("selected")
-      console.log("selected")
-      console.log("selected")
-      console.log("selected")
-      console.log("selected")
-      console.log("selected")
-      console.log("selected")
-      console.log("selected")
-      console.log("selected")
-      console.log("selected")
-      console.log("selected")
-      console.log("selected")
-      console.log(selected)
-      expect(selected).toHaveLength(12);
-      // expect(selected).toHaveLength(12);
+// const ReduxProvider = ({ children, reduxStore }: any) => (
+//    <Provider store={reduxStore}>{children}</Provider>
+// )
+
+// jest.mock('react-redux', () => {
+//    const ActualReactRedux = jest.requireActual('react-redux');
+//    return {
+//       ...ActualReactRedux,
+//       useSelector: jest.fn().mockImplementation(() => {
+//          return {};
+//       }),
+//    };
+// });
+
+beforeEach(() => {
+   fetch.resetMocks();
+});
+
+
+describe('<LaunchPads />', () => {
+   const initialState = {favorites: {...initialFavoritesState, favoriteLaunchPads: [ExampleLaunchPad, ExampleLaunchPad]}}
+   const mockStore = configureStore()
+   let store
+
+   it('renders three <LaunchPadItem /> components', async () => {
+       store = mockStore(initialState)
+
+      fetch.mockResponseOnce(JSON.stringify([ExampleLaunchPad, ExampleLaunchPad, ExampleLaunchPad]))
+
+      // BrowserRouter solves 'useHref() may be used only in the context of a <Router> component.'
+      render(
+         <Provider store={store}>
+            <BrowserRouter> 
+               <LaunchPads />
+            </BrowserRouter>
+         </Provider>
+      );
+
+      await waitFor(() => expect(screen.getAllByTestId('launchPadItem')).toHaveLength(3))
    });
 
    //   it('renders an `.icon-star`', () => {

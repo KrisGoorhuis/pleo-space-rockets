@@ -1,4 +1,5 @@
 export enum LocalStorageKeys {
    favoriteLaunches = "favoriteLaunches",
-   favoriteLaunchPads = "favoriteLaunchPads"
+   favoriteLaunchPads = "favoriteLaunchPads",
+   defaultIndex = "defaultIndex"
 }

@@ -16,6 +16,7 @@
     "@types/jest": "^27.0.2",
     "@types/react-dom": "^17.0.10",
     "@types/react-router-dom": "^5.3.2",
+    "@types/redux-mock-store": "^1.0.3",
     "framer-motion": "^5.0.1",
     "history": "^5.0.1",
     "jest-fetch-mock": "^3.0.3",
@@ -27,6 +28,7 @@
     "react-router": "^6.0.0-alpha.3",
     "react-router-dom": "^6.0.0-beta.8",
     "react-scripts": "3.4.3",
+    "redux-mock-store": "^1.5.4",
     "swr": "^0.3.0",
     "timeago.js": "^4.0.2",
     "typescript": "^4.4.4"
@@ -34,7 +36,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -50,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest-environment-jsdom-sixteen": "^2.0.0"
   }
 }

@@ -13,6 +13,7 @@ const LaunchPadItem = (props: launchPadItemProps) => {
 
   return (
     <Box
+      data-testid="launchPadItem"
       as={Link}
       to={`/launch-pads/${props.launchPad.site_id}`}
       boxShadow="md"

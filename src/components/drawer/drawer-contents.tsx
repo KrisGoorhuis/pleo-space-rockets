@@ -1,24 +1,29 @@
 import { Box, Divider, Text, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from '@chakra-ui/react'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../../redux'
+import { setDefaultIndex } from '../../redux/slices/favoritesSlice'
 import { LaunchItem } from '../launches/launchItem'
 import LaunchPadItem from '../launchPads/launchPadItem'
 
 
-interface DrawerContentsProps {
-
-}
+interface DrawerContentsProps {}
 
 const DrawerContents = (props: DrawerContentsProps) => {
    const favoriteLaunches = useSelector((state: State) => state.favorites.favoriteLaunches)
    const favoriteLaunchPads = useSelector((state: State) => state.favorites.favoriteLaunchPads)
+   const defaultIndex = useSelector((state: State) => state.favorites.defaultIndex)
+   const dispatch = useDispatch()
+
+   const handleSetDefaultIndex = (newIndex: number[]) => {
+      dispatch(setDefaultIndex(newIndex))
+   }
 
    return (
-      <Accordion defaultIndex={[0]} allowToggle>
+      <Accordion defaultIndex={defaultIndex || [0]} allowToggle>
          {
             favoriteLaunches.length > 0 ?
-            <AccordionItem border={0}>
+            <AccordionItem border={0} onClick={() => handleSetDefaultIndex([0])}>
                <AccordionButton>
                   <Text flex={1} textAlign="left">
                      Favorite Launches
@@ -51,7 +56,7 @@ const DrawerContents = (props: DrawerContentsProps) => {
 
          {
             favoriteLaunchPads.length > 0 ?
-            <AccordionItem border={0}>
+            <AccordionItem border={0} onClick={() => handleSetDefaultIndex([1])}>
                <AccordionButton>
                   <Text flex={1} textAlign="left">
                      Favorite Launch Pads
