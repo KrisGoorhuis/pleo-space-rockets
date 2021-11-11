@@ -67,7 +67,7 @@ export default function Launches() {
         {
           (props.data || array).map(() => {
             return (
-              <div>things2</div>
+              <div>things2again</div>
             )
           })
         }
