@@ -55,7 +55,7 @@ export default function Launches() {
   const MyComponent3 = () => {
     return (
       <div>
-        {data && data.flat().map((launch, i) => {
+        {data && data.map((launch, i) => {
           console.log("This ran")
           return ( // Key change used for testing purposes
             <LaunchItem launch={launch} key={launch.flight_number + i} />
