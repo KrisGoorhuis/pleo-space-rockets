@@ -24,6 +24,21 @@ export default function Launches() {
   console.log("data")
   console.log(data)
 
+  const MyComponent = () => {
+    const array = [1, 2, 3]
+    return (
+      <div>
+        {
+          array.map(item => {
+            <div>things</div>
+          })
+
+        }
+
+      </div>
+    )
+  }
+
   return (
     <div>
       <Breadcrumbs
@@ -32,6 +47,7 @@ export default function Launches() {
       {/* <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4"> */}
       <div>
         <div>TEXT</div>
+        <MyComponent />
         {
           [1, 2, 3, 4, 5].map((launch, i) => {
             console.log("This was actually found")
