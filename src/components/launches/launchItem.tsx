@@ -15,6 +15,8 @@ interface LaunchItemProps {
 
 export function LaunchItem(props: LaunchItemProps) {
 
+   console.log("I exist")
+
    return (
       <Box
          data-testid={"launchItem"}
