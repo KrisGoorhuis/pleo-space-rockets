@@ -32,13 +32,14 @@ For example, useParams() from react-routerDom and useSWR() are now receiving typ
 The types associated with data returned from spacexdata.com were built with a little bit of `typeof` cheating. 
 The launch pad object in particular is huge, so converting it to a hard type by hand would take a fair bit of time. I'd do this for production, but this method came with bonus overlap with testing.
 
-`framer-motion`, which came with the Chakra update, required a webpack config update relating to a `.mjs` file. Frustratingly, the following needed to be re-added to the rules in node_modules\react-scripts\config\webpack.config.js several times:
-
+`framer-motion`, which came with the Chakra update, required a webpack config update relating to a `.mjs` file. Because `create-react-app` doesn't let us modify its webpack config directly, I addressed it with `react-app-rewired`. A config-overrides files was added at the root with
+```
    {
       type: 'javascript/auto',
       test: /\.mjs$/,
       use: []
    },
+```
 
 There were a few other small updates, such as removing the "alt" from a Chakra element appearing as an iframe.
 Reconfiguring and refactoring in response to this switch was the most difficult part of the project. Lots of time spent doing something other than writing code.
