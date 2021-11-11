@@ -7,6 +7,7 @@ import Breadcrumbs from "../breadcrumbs";
 import LoadMoreButton from "../load-more-button";
 import { LaunchItem } from "./launchItem";
 import { Launch } from "../../model";
+import { ExampleLaunch } from "../../model/example-launch";
 
 
 const PAGE_SIZE = 12;
@@ -28,6 +29,7 @@ export default function Launches() {
 
   const MyComponent = () => {
     const array = [1, 2, 3]
+    console.log()
     return (
       <div>
         {
@@ -40,9 +42,42 @@ export default function Launches() {
       </div>
     )
   }
+
+  const MyComponent1edited = () => {
+    const array = [1, 2, 3]
+    console.log()
+    return (
+      <div>
+        {
+          (data || array).map(() => {
+            return (
+              <div>things2</div>
+            )
+          })
+        }
+      </div>
+    )
+  }
+  const MyComponent1editedagain = (props: {data: Launch[]}) => {
+    const array = [1, 2, 3]
+    console.log("props.data from editedagain")
+    console.log(props.data)
+    return (
+      <div>
+        {
+          (props.data || array).map(() => {
+            return (
+              <div>things2</div>
+            )
+          })
+        }
+      </div>
+    )
+  }
   const MyComponent2 = (props: {data: Launch[]}) => {
     return (
       <div>
+        component 2 inner
         {(props.data).map((launch, i) => {
           console.log("This ran")
           return ( // Key change used for testing purposes
@@ -84,13 +119,19 @@ export default function Launches() {
       <div>
         <MyComponent />
       </div>
-      component 2
+      component 2 outer
       <div>
         <MyComponent2 data={data || []} />
       </div>
       component3
       <div>
         <MyComponent3 />
+      </div>
+      <div>
+        <MyComponent1edited />
+      </div>
+      <div>
+        <MyComponent1editedagain data={data || [ExampleLaunch]} />
       </div>
 
       {/* <div >
