@@ -29,12 +29,12 @@ export default function Launches() {
     return (
       <div>
         {
-          array.map(item => {
-            return (<div>things</div>)
+          array.map(() => {
+            return (
+              <div>things</div>
+            )
           })
-
         }
-
       </div>
     )
   }
