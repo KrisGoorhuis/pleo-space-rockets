@@ -60,7 +60,7 @@ export default function Launches() {
   const MyComponent3 = () => {
     return (
       <div>
-        {(data || [1,2,3]).map(() => {
+        {([1,2,3]).map(() => {
           console.log("This ran")
           return ( // Key change used for testing purposes
             <div>
