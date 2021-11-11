@@ -31,6 +31,12 @@ export default function Launches() {
       />
       {/* <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4"> */}
       <div >
+        {data &&
+          data.map((launch, i) => ( // Key change used for testing purposes
+              <LaunchItem launch={launch} key={launch.flight_number + i} />
+            ))}
+      </div>
+      <div >
         {error && <Error />}
         {data &&
           data
