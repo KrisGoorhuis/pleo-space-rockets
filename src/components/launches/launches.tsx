@@ -38,6 +38,7 @@ export default function Launches() {
             return ( // Key change used for testing purposes
               <div>
                 Text
+                {console.log("testestest")}
               </div>
             )
           })
