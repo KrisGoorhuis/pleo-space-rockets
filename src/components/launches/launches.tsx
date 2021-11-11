@@ -58,7 +58,10 @@ export default function Launches() {
         {data && data.map((launch, i) => {
           console.log("This ran")
           return ( // Key change used for testing purposes
-            <LaunchItem launch={launch} key={launch.flight_number + i} />
+            <div>
+              there is a launch item in the same div as me
+              <LaunchItem launch={launch} key={launch.flight_number + i} />
+            </div>
           )
         })
         }
