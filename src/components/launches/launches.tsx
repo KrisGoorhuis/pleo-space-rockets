@@ -31,14 +31,16 @@ export default function Launches() {
       />
       {/* <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4"> */}
       <div>
-        {[1, 2, 3, 4, 5].map((launch, i) => {
-          console.log("This was actually found")
-          return ( // Key change used for testing purposes
-            <div>
-              Text
-            </div>
-          )
-        })
+        <div>TEXT</div>
+        {
+          [1, 2, 3, 4, 5].map((launch, i) => {
+            console.log("This was actually found")
+            return ( // Key change used for testing purposes
+              <div>
+                Text
+              </div>
+            )
+          })
         }
 
       </div>
