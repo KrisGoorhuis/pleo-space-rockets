@@ -24,6 +24,7 @@ export default function Launches() {
   console.log("data")
   console.log(data)
 
+
   const MyComponent = () => {
     const array = [1, 2, 3]
     return (
@@ -38,6 +39,19 @@ export default function Launches() {
       </div>
     )
   }
+  const MyComponent2 = () => {
+    return (
+      <div >
+        {error && <Error />}
+        {data &&
+          data
+            .flat()
+            .map((launch, i) => ( // Key change used for testing purposes
+              <LaunchItem launch={launch} key={launch.flight_number + i} />
+            ))}
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -46,7 +60,6 @@ export default function Launches() {
       />
       {/* <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4"> */}
       <div>
-        <div>TEXT</div>
         <MyComponent />
         {
           [1, 2, 3, 4, 5].map((launch, i) => {
@@ -61,7 +74,9 @@ export default function Launches() {
         }
 
       </div>
-      <div >
+      <MyComponent2 />
+
+      {/* <div >
         {error && <Error />}
         {data &&
           data
@@ -69,7 +84,7 @@ export default function Launches() {
             .map((launch, i) => ( // Key change used for testing purposes
               <LaunchItem launch={launch} key={launch.flight_number + i} />
             ))}
-      </div>
+      </div> */}
       <LoadMoreButton
         loadMore={() => size && setSize && setSize(size + 1)}
         data={data}
