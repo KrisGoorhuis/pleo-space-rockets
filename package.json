@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "contributors": [
     "Maciek Pekala <maciek@pleo.io>",
-    "Peter Scott <peter@pleo.io>"
+    "Peter Scott <peter@pleo.io>",
+    "Kris Goorhuis <krisgoorhuis@gmail.com>"
   ],
   "license": "MIT",
   "private": true,
+  "engines": { 
+    "node": "14.16.5" 
+  },
   "dependencies": {
     "@chakra-ui/react": "^1.6.10",
     "@emotion/react": "^11.5.0",

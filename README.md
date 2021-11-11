@@ -32,13 +32,13 @@ For example, useParams() from react-routerDom and useSWR() are now receiving typ
 The types associated with data returned from spacexdata.com were built with a little bit of `typeof` cheating. 
 The launch pad object in particular is huge, so converting it to a hard type by hand would take a fair bit of time. I'd do this for production, but this method came with bonus overlap with testing.
 
-`framer-motion`, which came with the Chakra update, required a webpack config update relating to a `.mjs` file. Because `create-react-app` doesn't let us modify its webpack config directly, I addressed it with `react-app-rewired`. A config-overrides files was added at the root with
+`framer-motion`, which came with the Chakra update, required a webpack config update relating to a `.mjs`. Because `create-react-app` doesn't let us modify its webpack config directly, I addressed it with `react-app-rewired`. A config-overrides files was added at the root with
 ```
    {
-      type: 'javascript/auto',
-      test: /\.mjs$/,
-      use: []
-   },
+     test: /\.mjs$/,
+     include: /node_modules/,
+     type: "javascript/auto"
+   }
 ```
 
 There were a few other small updates, such as removing the "alt" from a Chakra element appearing as an iframe.
@@ -95,10 +95,3 @@ Swr was an interesting thing to discover. Some don't like the proliferation of p
 I hadn't had occasion to think about pagination beyond awareness before, but it's a big win for the right app. And a package makes it simple!
 
 Configuration isn't terribly fun, but it's something you can *just be done with* and continue building, for the most part. 
-
-
-
-# pleo-space-rockets TODO
-
-open to correct favorites - keep track of page in Redux?
-
