@@ -39,28 +39,33 @@ export default function Launches() {
       </div>
     )
   }
-  const MyComponent2 = () => {
+  const MyComponent2 = (props: {data: Launch[]}) => {
     return (
-      <div >
-        {error && <Error />}
-        {data &&
-          data
-            .flat()
-            .map((launch, i) => ( // Key change used for testing purposes
+      <div>
+        {(props.data).map((launch, i) => {
+          console.log("This ran")
+          return ( // Key change used for testing purposes
+            <div>
+              there is a launch item in the same div as me
+              <div>text</div>
               <LaunchItem launch={launch} key={launch.flight_number + i} />
-            ))}
+            </div>
+          )
+        })
+        }
       </div>
     )
   }
   const MyComponent3 = () => {
     return (
       <div>
-        {data && data.map((launch, i) => {
+        {(data || [1,2,3]).map((launch, i) => {
           console.log("This ran")
           return ( // Key change used for testing purposes
             <div>
               there is a launch item in the same div as me
-              <LaunchItem launch={launch} key={launch.flight_number + i} />
+              <div>text</div>
+              {/* <LaunchItem launch={launch} key={launch.flight_number + i} /> */}
             </div>
           )
         })
@@ -80,7 +85,7 @@ export default function Launches() {
       </div>
       component 2
       <div>
-        <MyComponent2 />
+        <MyComponent2 data={data || []} />
       </div>
       component3
       <div>
