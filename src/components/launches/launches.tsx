@@ -8,6 +8,7 @@ import LoadMoreButton from "../load-more-button";
 import { LaunchItem } from "./launchItem";
 import { Launch } from "../../model";
 import { ExampleLaunch } from "../../model/example-launch";
+import { SimpleGrid } from "@chakra-ui/layout";
 
 
 const PAGE_SIZE = 12;
@@ -31,7 +32,7 @@ export default function Launches() {
     const array = [1, 2, 3]
     console.log()
     return (
-      <div>
+      <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
         {
           array.map(() => {
             return (
@@ -39,39 +40,41 @@ export default function Launches() {
             )
           })
         }
-      </div>
+      </SimpleGrid>
     )
   }
 
-  const MyComponent1edited = () => {
-    const array = [1, 2, 3]
-    console.log()
-    return (
-      <div>
-        {
-          (data || array).map(() => {
-            return (
-              <div>things2</div>
-            )
-          })
-        }
-      </div>
-    )
-  }
+  // const MyComponent1edited = () => {
+  //   const array = [1, 2, 3]
+  //   console.log()
+  //   return (
+  //     <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
+  //       {
+  //         (data || array).map(() => {
+  //           return (
+  //             <div>things2</div>
+  //           )
+  //         })
+  //       }
+  //     </SimpleGrid>
+  //   )
+  // }
   const MyComponent1editedagain = (props: {data: Launch[]}) => {
     const array = [1, 2, 3]
     console.log("props.data from editedagain")
     console.log(props.data)
     return (
-      <div>
+      <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
         {
-          (props.data || array).map(() => {
+          (props.data || array).map((item) => {
+            console.log("item")
+            console.log(item)
             return (
               <div>things2again</div>
             )
           })
         }
-      </div>
+      </SimpleGrid>
     )
   }
   const MyComponent2 = (props: {data: Launch[]}) => {
@@ -127,12 +130,11 @@ export default function Launches() {
       <div>
         <MyComponent3 />
       </div>
-      <div>
-        <MyComponent1edited />
-      </div>
+
       <div>
         <MyComponent1editedagain data={data || [ExampleLaunch]} />
       </div>
+      <MyComponent1editedagain data={data || [ExampleLaunch]} />
 
       {/* <div >
         {error && <Error />}
