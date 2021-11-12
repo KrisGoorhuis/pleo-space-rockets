@@ -90,7 +90,7 @@ export default function Launches() {
             return (
               <div>2
                 
-                <div>{item}</div>
+                <div>{item.mission_id}</div>
               </div>
             )
           })
