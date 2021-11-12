@@ -23,15 +23,21 @@ const LaunchPadItem = (props: launchPadItemProps) => {
     >
       <Box p="6">
         <Box d="flex" alignItems="baseline">
-          {props.launchPad.status === "active" ? (
-            <Badge px="2" variant="solid" colorScheme="green">
-              Active
-            </Badge>
-          ) : (
-            <Badge px="2" variant="solid" colorScheme="red">
-              Retired
-            </Badge>
-          )}
+          <Box>
+            <Box marginRight="10px" display="inline-block">
+              <FavoriteLaunchPadButton {...props} />
+            </Box>
+            {props.launchPad.status === "active" ? (
+              <Badge px="2" variant="solid" colorScheme="green">
+                Active
+              </Badge>
+            ) : (
+              <Badge px="2" variant="solid" colorScheme="red">
+                Retired
+              </Badge>
+            )}
+
+          </Box>
           <Box
             color="gray.500"
             fontWeight="semibold"
@@ -43,8 +49,6 @@ const LaunchPadItem = (props: launchPadItemProps) => {
             {props.launchPad.attempted_launches} attempted &bull;{" "}
             {props.launchPad.successful_launches} succeeded
           </Box>
-          <FavoriteLaunchPadButton {...props} />
-
         </Box>
 
         <Box

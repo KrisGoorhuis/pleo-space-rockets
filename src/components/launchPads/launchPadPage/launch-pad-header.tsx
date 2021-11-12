@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Heading, Stack, Box, Badge } from "@chakra-ui/react";
+import { Flex, Heading, Stack, Badge } from "@chakra-ui/react";
 
 import FavoriteLaunchPadButton from "../favoriteLaunchPadButton";
 import { LaunchPad as LaunchPadType } from '../../../model/index'
@@ -32,12 +32,9 @@ function LaunchPadHeader(props: { launchPad: LaunchPadType }) {
             borderRadius="lg"
          >
             {props.launchPad.site_name_long}
-            LAUNCH PAD PAGE
          </Heading>
-         <Stack isInline spacing="3">
-            <Badge cursor="pointer" position="relative" top="-4px">
-               <FavoriteLaunchPadButton {...props} />
-            </Badge>
+         <Stack isInline spacing="3" display="flex" alignItems="center" justifyContent="center">
+            <FavoriteLaunchPadButton {...props} />
             <Badge colorScheme="purple" fontSize={["sm", "md"]}>
                {props.launchPad.successful_launches}/{props.launchPad.attempted_launches}{" "}
                successful

@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Heading, Stack, Box, Badge, Image } from "@chakra-ui/react";
+import { Flex, Heading, Stack, Badge, Image } from "@chakra-ui/react";
 
 import { LaunchProps } from "../../../model";
 import FavoriteLaunchButton from "../favoriteLaunchButton";

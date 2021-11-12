@@ -29,8 +29,6 @@ export function useSpaceX<T>(path: string | null, options = {}) {
   if (path) {
     endpointUrl = getSpaceXUrl(path, options);
   }
-  console.log("useSWR<T>(endpointUrl, fetcher)")
-  console.log(useSWR<T>(endpointUrl, fetcher))
   return useSWR<T>(endpointUrl, fetcher);
 }
 

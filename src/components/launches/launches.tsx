@@ -11,7 +11,6 @@ import { Launch } from "../../model";
 const PAGE_SIZE = 12;
 
 export default function Launches() {
-  console.log("launches render")
   const { data, error, isValidating, setSize, size } = useSpaceXPaginated<Launch>(
     "/launches/past",
     {
