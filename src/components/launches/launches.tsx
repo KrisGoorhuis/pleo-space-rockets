@@ -22,37 +22,9 @@ export default function Launches() {
     }
   );
 
-  console.log("data")
-  console.log(data)
 
 
-  const MyComponent1editedagainagain = (props: { data: Launch[] }) => {
-    return (
-      <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
-        {
-          (props.data.flat()).map((item, i) => {
-            return (
-              <LaunchItem launch={item} key={item.flight_number + i} />
-            )
-          })
-        }
-      </SimpleGrid>
-    )
-  }
-  const TestComponent = (props: { data: Launch[] }) => {
-    return (
-      <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
-        {
-          (props.data.flat()).map((item, i) => {
-            return (
-              <LaunchItem launch={item} key={item.flight_number + i} />
-            )
-          })
-        }
-      </SimpleGrid>
-    )
-  }
-  const TestComponent2 = (props: { data: Launch[] | undefined }) => {
+  const LaunchMapper = (props: { data: Launch[] | undefined }) => {
     return (
       <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
         {error && <Error />}
@@ -74,9 +46,7 @@ export default function Launches() {
         items={[{ label: "Home", to: "/" }, { label: "Launches" }]}
       />
 
-      <MyComponent1editedagainagain data={data || [ExampleLaunch]} />
-      <TestComponent data={data || []} />
-      <TestComponent2 data={data} />
+      <LaunchMapper data={data} />
 
       <SimpleGrid >
         {error && <Error />}
@@ -86,6 +56,18 @@ export default function Launches() {
             .map((launch, i) => ( // Key change used for testing purposes
               <LaunchItem launch={launch} key={launch.flight_number + i} />
             ))}
+      </SimpleGrid>
+      <SimpleGrid >
+        {error && <Error />}
+        {data &&
+          data
+            .flat()
+            .map((launch, i) => {
+              return ( // Key change used for testing purposes
+                <LaunchItem launch={launch} key={launch.flight_number + i} />
+              )
+            })
+        }
       </SimpleGrid>
       <LoadMoreButton
         loadMore={() => size && setSize && setSize(size + 1)}
