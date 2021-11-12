@@ -40,9 +40,7 @@ const LaunchPageHeader = (props: LaunchProps) => {
          </Heading>
 
          <Stack isInline spacing="3" alignItems="center" justifyContent="center" display="flex">
-            <Box cursor="pointer" position="relative" top="-4px">
-               <FavoriteLaunchButton {...props} />
-            </Box>
+            <FavoriteLaunchButton {...props} />
             <Badge colorScheme="purple" fontSize={["xs", "md"]}>
                #{props.launch.flight_number}
             </Badge>

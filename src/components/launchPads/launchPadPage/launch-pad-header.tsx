@@ -35,9 +35,9 @@ function LaunchPadHeader(props: { launchPad: LaunchPadType }) {
             LAUNCH PAD PAGE
          </Heading>
          <Stack isInline spacing="3">
-            <Box cursor="pointer" position="relative" top="-4px">
+            <Badge cursor="pointer" position="relative" top="-4px">
                <FavoriteLaunchPadButton {...props} />
-            </Box>
+            </Badge>
             <Badge colorScheme="purple" fontSize={["sm", "md"]}>
                {props.launchPad.successful_launches}/{props.launchPad.attempted_launches}{" "}
                successful

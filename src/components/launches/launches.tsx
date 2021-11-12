@@ -8,10 +8,10 @@ import LoadMoreButton from "../load-more-button";
 import { LaunchItem } from "./launchItem";
 import { Launch } from "../../model";
 
-
 const PAGE_SIZE = 12;
 
 export default function Launches() {
+  console.log("launches render")
   const { data, error, isValidating, setSize, size } = useSpaceXPaginated<Launch>(
     "/launches/past",
     {
@@ -20,7 +20,6 @@ export default function Launches() {
       sort: "launch_date_utc",
     }
   );
-
 
 
   // This is essentially the same as what already existed in this component, but for some reason Netlify likes this much better.

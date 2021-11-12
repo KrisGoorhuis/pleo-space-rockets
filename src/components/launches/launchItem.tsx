@@ -14,9 +14,6 @@ interface LaunchItemProps {
 }
 
 export function LaunchItem(props: LaunchItemProps) {
-
-   console.log("I exist")
-
    return (
       <Box
          data-testid={"launchItem"}
@@ -28,30 +25,38 @@ export function LaunchItem(props: LaunchItemProps) {
          overflow="hidden"
          position="relative"
       >
-         <Image
-            src={
-               props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
-               props.launch.links.mission_patch_small
-            }
-            alt={`${props.launch.mission_name} launch`}
-            height={props.isDrawerFavorite ? [100] : ["200px", null, "300px"]}
-            width="100%"
-            objectFit={"cover"}
-            objectPosition={props.isDrawerFavorite ? "center" : "bottom"}
-         />
-
-         {
-            !props.isDrawerFavorite &&
+         <Box position="relative">
             <Image
-               position="absolute"
-               top="5"
-               right="5"
-               src={props.launch.links.mission_patch_small}
-               height="75px"
-               objectFit="contain"
-               objectPosition="bottom"
+               src={
+                  props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
+                  props.launch.links.mission_patch_small
+               }
+               alt={`${props.launch.mission_name} launch`}
+               height={props.isDrawerFavorite ? [100] : ["200px", null, "300px"]}
+               width="100%"
+               objectFit={"cover"}
+               objectPosition={props.isDrawerFavorite ? "center" : "bottom"}
             />
-         }
+
+            {
+               !props.isDrawerFavorite &&
+               <Image
+                  position="absolute"
+                  top="5"
+                  right="5"
+                  src={props.launch.links.mission_patch_small}
+                  height="75px"
+                  objectFit="contain"
+                  objectPosition="bottom"
+               />
+            }
+            {
+               props.isDrawerFavorite &&
+               <Box position="absolute" bottom="10px" right="10px">
+                  <FavoriteLaunchButton {...props} />
+               </Box>
+            }
+         </Box>
 
          <Box p="6">
             <Box d="flex" alignItems="baseline">
@@ -76,7 +81,10 @@ export function LaunchItem(props: LaunchItemProps) {
                      {props.launch.rocket.rocket_name} &bull; {props.launch.launch_site.site_name}
                   </Box>
                </Box>
-               <FavoriteLaunchButton {...props} />
+               {
+                  !props.isDrawerFavorite &&
+                  <FavoriteLaunchButton {...props} />
+               }
             </Box>
             <Box
                mt="1"

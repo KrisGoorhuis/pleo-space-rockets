@@ -34,7 +34,7 @@ const DrawerContents = (props: DrawerContentsProps) => {
                   {
                      favoriteLaunches.map((launch, i) => {
                         return (
-                           <Box key={launch.flight_number}>
+                           <Box key={launch.flight_number + i}>
                               <LaunchItem launch={launch} isDrawerFavorite />
                               {
                                  i < favoriteLaunches.length - 1 && favoriteLaunches.length > 0 &&
@@ -67,7 +67,7 @@ const DrawerContents = (props: DrawerContentsProps) => {
                   {
                      favoriteLaunchPads.map((launchPad, i) => {
                         return (
-                           <Box key={launchPad.site_id}>
+                           <Box key={launchPad.site_id + i}>
                               <LaunchPadItem launchPad={launchPad} isDrawerFavorite />
                               {
                                  i < favoriteLaunchPads.length - 1 && favoriteLaunchPads.length > 0 &&
