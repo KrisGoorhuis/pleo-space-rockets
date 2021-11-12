@@ -10,7 +10,7 @@
    - Added Redux (Toolkit) to keep track
 - Added testing for network request utilities, Redux code, and conditional component rendering
    - @types/jest, jest-fetch-mock, react-testing-library added to dependencies
-
+- Restructured and reorganized components primarily relating to launches and launch pads
 
 ## v0.1.1
 - Fixed an issue where launch datetimes displayed the user's time zone rather than the launch's time zone as intended. The user's time zone is instead displayed in tooltip. 
@@ -71,8 +71,8 @@ Calling additional pieces of the spacex API would be a straightforward bonus, bu
 ## Bug Fix
 Javascript's vanilla time-related objects are often at least a little frustrating, so I decided to use Moment.js.
 Additionally, time zones are ticky without being explicitly told - all we have is the time stamp itself (well, and coordinates, but making a
-call to something like Google Maps to determine a time zone for every card would be a bit much.) I decided to show the UTC offset in place of 
-a time zone instead.
+call to something like Google Maps to determine a time zone for every card would be a bit much). I decided to show the UTC offset in place of 
+a time zone.
 
 Default behavior is to parse time in the user's time zone. Moment's `.parseZone()` will keep the original string's offset intact. Adding an underline was the best method of suggesting that something is hoverable.
 
@@ -80,11 +80,10 @@ Default behavior is to parse time in the user's time zone. Moment's `.parseZone(
 Redux was added to keep track of favorites. Uneccessary if we're just using local storage for now, but following the logic of preparation over just getting things done, it felt like a reasonable add. And I like writing Toolkit slices. Persisting data just occurs in the reducers.
 
 Saving something to favorites or removing it from its non-drawer card are a single click, but they can feel like they're vanishing into the ether when removed from the drawer. A confirmation prompt was added because the potential negative consequences were greater.
-Indent on 'ago' was not intentional, but I decided I liked it for the grayed subtext.
 
-Documentation claims that launches have a unique `flight_id`, but none of their examples contained as much. For Redux reducer logic I decided to use `flight_number` as a best alternative, to find that that's what was already used as a key in `launch-pad.tsx`. 
+Documentation claimed that launches all have a unique `flight_id`, but none of their examples contained as much. For Redux reducer logic I decided to use `flight_number` as a best alternative, only to find that that's what was already used as a key in `launch-pad.tsx`. 
 
-At the risk of overengineering, the app keeps track of which accordion of favorites was last opened.
+At the risk of overengineering, the app also keeps track of which accordion of favorites was last opened.
 
 
 # Lessons, Learnings
@@ -92,4 +91,4 @@ At the risk of overengineering, the app keeps track of which accordion of favori
 
 I hadn't had occasion to think about pagination beyond awareness before, but it's a big win for the right app. And a package makes it simple!
 
-Configuration isn't terribly fun, but it's something you can *just be done with* and continue building, for the most part. 
+Configuration isn't the most fun, but it's also something you can *just be done with* and continue building, for the most part. 
