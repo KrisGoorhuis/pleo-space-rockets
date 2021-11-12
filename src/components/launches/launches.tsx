@@ -7,7 +7,6 @@ import Breadcrumbs from "../breadcrumbs";
 import LoadMoreButton from "../load-more-button";
 import { LaunchItem } from "./launchItem";
 import { Launch } from "../../model";
-import { ExampleLaunch } from "../../model/example-launch";
 
 
 const PAGE_SIZE = 12;
