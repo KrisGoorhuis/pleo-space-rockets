@@ -30,7 +30,7 @@ export default function Launches() {
         {props.data &&
           (props.data.flat()).map((item, i) => {
             return (
-              <LaunchItem launch={item} key={item.flight_number + i} />
+              <LaunchItem launch={item} key={item.flight_number + i + item.launch_date_unix} />
             )
           })
         }
