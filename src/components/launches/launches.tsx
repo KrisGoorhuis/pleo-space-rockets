@@ -66,7 +66,7 @@ export default function Launches() {
     return (
       <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
         {
-          (props.data || array).map((item) => {
+          (props.data.flat() || array).map((item) => {
             console.log("item")
             console.log(item)
             return (
@@ -78,40 +78,43 @@ export default function Launches() {
     )
   }
   const MyComponent2 = (props: {data: Launch[]}) => {
+    const array = [1, 2, 3]
+    console.log("props.data from editedagain")
+    console.log(props.data)
     return (
-      <div>
-        component 2 inner
-        {(props.data).map((launch, i) => {
-          console.log("This ran")
-          return ( // Key change used for testing purposes
-            <div>
-              there is a launch item in the same div as me
-              <div>text</div>
-              <LaunchItem launch={launch} key={launch.flight_number + i} />
-            </div>
-          )
-        })
+      <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
+        {
+          (props.data.flat() || array).map((item) => {
+            console.log("item")
+            console.log(item)
+            return (
+              <div>2
+                
+                <div>{item}</div>
+              </div>
+            )
+          })
         }
-      </div>
+      </SimpleGrid>
     )
   }
-  const MyComponent3 = () => {
-    return (
-      <div>
-        {([1,2,3]).map(() => {
-          console.log("This ran")
-          return ( // Key change used for testing purposes
-            <div>
-              there is a launch item in the same div as me
-              <div>text</div>
-              {/* <LaunchItem launch={launch} key={launch.flight_number + i} /> */}
-            </div>
-          )
-        })
-        }
-      </div>
-    )
-  }
+  // const MyComponent3 = () => {
+  //   return (
+  //     <div>
+  //       {([1,2,3]).map(() => {
+  //         console.log("This ran")
+  //         return ( // Key change used for testing purposes
+  //           <div>
+  //             there is a launch item in the same div as me
+  //             <div>text</div>
+  //             {/* <LaunchItem launch={launch} key={launch.flight_number + i} /> */}
+  //           </div>
+  //         )
+  //       })
+  //       }
+  //     </div>
+  //   )
+  // }
 
   return (
     <div>
@@ -127,9 +130,9 @@ export default function Launches() {
         <MyComponent2 data={data || []} />
       </div>
       component3
-      <div>
+      {/* <div>
         <MyComponent3 />
-      </div>
+      </div> */}
 
       <div>
         <MyComponent1editedagain data={data || [ExampleLaunch]} />
