@@ -7,7 +7,7 @@ import { LaunchItem } from '../launches/launchItem'
 import LaunchPadItem from '../launchPads/launchPadItem'
 
 
-interface DrawerContentsProps {}
+interface DrawerContentsProps { }
 
 const DrawerContents = (props: DrawerContentsProps) => {
    const favoriteLaunches = useSelector((state: State) => state.favorites.favoriteLaunches)
@@ -23,66 +23,66 @@ const DrawerContents = (props: DrawerContentsProps) => {
       <Accordion defaultIndex={defaultIndex || [0]} allowToggle>
          {
             favoriteLaunches.length > 0 ?
-            <AccordionItem border={0} onClick={() => handleSetDefaultIndex([0])}>
-               <AccordionButton>
-                  <Text flex={1} textAlign="left">
-                     Favorite Launches
-                  </Text>
-                  <AccordionIcon />
-               </AccordionButton>
-               <AccordionPanel>
-                  {
-                     favoriteLaunches.map((launch, i) => {
-                        return (
-                           <Box key={launch.flight_number + i}>
-                              <LaunchItem launch={launch} isDrawerFavorite />
-                              {
-                                 i < favoriteLaunches.length - 1 && favoriteLaunches.length > 0 &&
-                                 <Divider marginBottom="24px" />
-                              }
-                           </Box>
-                        )
-                     })
-                  }
-               </AccordionPanel>
-            </AccordionItem>
-            :
-            <Text>
-               No favorite launches yet
-            </Text>
+               <AccordionItem border={0} onClick={() => handleSetDefaultIndex([0])}>
+                  <AccordionButton>
+                     <Text flex={1} textAlign="left">
+                        Favorite Launches
+                     </Text>
+                     <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel>
+                     {
+                        favoriteLaunches.map((launch, i) => {
+                           return (
+                              <Box key={launch.flight_number + i}>
+                                 <LaunchItem launch={launch} isDrawerFavorite />
+                                 {
+                                    i < favoriteLaunches.length - 1 && favoriteLaunches.length > 0 &&
+                                    <Divider marginBottom="24px" />
+                                 }
+                              </Box>
+                           )
+                        })
+                     }
+                  </AccordionPanel>
+               </AccordionItem>
+               :
+               <Text>
+                  No favorite launches yet
+               </Text>
          }
 
          <Divider borderWidth="2px" marginTop="10px" marginBottom="10px" />
 
          {
             favoriteLaunchPads.length > 0 ?
-            <AccordionItem border={0} onClick={() => handleSetDefaultIndex([1])}>
-               <AccordionButton>
-                  <Text flex={1} textAlign="left">
-                     Favorite Launch Pads
-                  </Text>
-                  <AccordionIcon />
-               </AccordionButton>
-               <AccordionPanel>
-                  {
-                     favoriteLaunchPads.map((launchPad, i) => {
-                        return (
-                           <Box key={launchPad.site_id + i}>
-                              <LaunchPadItem launchPad={launchPad} isDrawerFavorite />
-                              {
-                                 i < favoriteLaunchPads.length - 1 && favoriteLaunchPads.length > 0 &&
-                                 <Divider marginBottom="24px" />
-                              }
-                           </Box>
-                        )
-                     })
-                  }
-               </AccordionPanel>
-            </AccordionItem>
-            :
-            <Text>
-               No favorite launch pads yet
-            </Text>
+               <AccordionItem border={0} onClick={() => handleSetDefaultIndex([1])}>
+                  <AccordionButton>
+                     <Text flex={1} textAlign="left">
+                        Favorite Launch Pads
+                     </Text>
+                     <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel>
+                     {
+                        favoriteLaunchPads.map((launchPad, i) => {
+                           return (
+                              <Box key={launchPad.site_id + i}>
+                                 <LaunchPadItem launchPad={launchPad} isDrawerFavorite />
+                                 {
+                                    i < favoriteLaunchPads.length - 1 && favoriteLaunchPads.length > 0 &&
+                                    <Divider marginBottom="24px" />
+                                 }
+                              </Box>
+                           )
+                        })
+                     }
+                  </AccordionPanel>
+               </AccordionItem>
+               :
+               <Text>
+                  No favorite launch pads yet
+               </Text>
          }
       </Accordion>
    )

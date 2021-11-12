@@ -19,7 +19,7 @@ const FavoriteLaunchPadButton = (props: FavoriteLaunchPadButtonProps) => {
    const favoriteLaunchPads = useSelector((state: State) => state?.favorites?.favoriteLaunchPads)
    const favoriteLaunchPadNumbers = favoriteLaunchPads.map((item: LaunchPad) => item.site_id)
    const isFavorited = favoriteLaunchPadNumbers.includes(props.launchPad.site_id)
-   
+
 
    const toggleFavorite = () => {
       if (isFavorited) {

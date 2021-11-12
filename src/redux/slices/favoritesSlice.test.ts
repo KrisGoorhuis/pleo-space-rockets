@@ -15,7 +15,7 @@ test('should handle a launch being added to an empty list', () => {
 })
 
 test('should handle a launch being added to an existing list', () => {
-   const previousState: FavoritesDataSlice = {...initialFavoritesState, favoriteLaunches: [ExampleLaunch]}
+   const previousState: FavoritesDataSlice = { ...initialFavoritesState, favoriteLaunches: [ExampleLaunch] }
    expect(slice.reducer(previousState, addToFavoriteLaunches(ExampleLaunch)).favoriteLaunches).toEqual([
       ExampleLaunch,
       ExampleLaunch
@@ -29,7 +29,7 @@ test('should handle a launch pad being added to an empty list', () => {
    ])
 })
 test('should handle a launch pad being added to an existing list', () => {
-   const previousState: FavoritesDataSlice = {...initialFavoritesState, favoriteLaunchPads: [ExampleLaunchPad]}
+   const previousState: FavoritesDataSlice = { ...initialFavoritesState, favoriteLaunchPads: [ExampleLaunchPad] }
    expect(slice.reducer(previousState, addToFavoriteLaunchPads(ExampleLaunchPad)).favoriteLaunchPads).toEqual([
       ExampleLaunchPad,
       ExampleLaunchPad

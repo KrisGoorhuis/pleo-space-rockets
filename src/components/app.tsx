@@ -57,7 +57,7 @@ function NavBar() {
       </Text>
 
       <Button variant={'outline'} onClick={handleToggleIsOpen} >
-        <Box style={{color: 'gold', marginRight: 10, marginLeft: -5, position: 'relative', top: 1 }} as={Star} />
+        <Box style={{ color: 'gold', marginRight: 10, marginLeft: -5, position: 'relative', top: 1 }} as={Star} />
         Favorites
       </Button>
       <SideDrawer isOpen={isOpen} toggleIsOpen={handleToggleIsOpen} />

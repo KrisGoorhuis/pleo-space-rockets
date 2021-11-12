@@ -18,19 +18,19 @@ beforeEach(() => {
 
 
 describe('<LaunchPads />', () => {
-   const initialState = {favorites: initialFavoritesState}
+   const initialState = { favorites: initialFavoritesState }
    const mockStore = configureStore()
    let store
 
    it('renders three <LaunchPadItem /> components', async () => {
-       store = mockStore(initialState)
+      store = mockStore(initialState)
 
       fetch.mockResponseOnce(JSON.stringify([ExampleLaunchPad, ExampleLaunchPad, ExampleLaunchPad]))
 
       // BrowserRouter solves 'useHref() may be used only in the context of a <Router> component.'
       render(
          <Provider store={store}>
-            <BrowserRouter> 
+            <BrowserRouter>
                <LaunchPads />
             </BrowserRouter>
          </Provider>
@@ -38,25 +38,4 @@ describe('<LaunchPads />', () => {
 
       await waitFor(() => expect(screen.getAllByTestId('launchPadItem')).toHaveLength(3))
    });
-
-   //   it('renders an `.icon-star`', () => {
-   //     const wrapper = shallow(<LaunchPads />);
-   //     expect(wrapper.find('.icon-star')).toHaveLength(1);
-   //   });
-
-   //   it('renders children when passed in', () => {
-   //     const wrapper = shallow((
-   //       <LaunchPads>
-   //         <div className="unique" />
-   //       </LaunchPads>
-   //     ));
-   //     expect(wrapper.contains(<div className="unique" />)).to.equal(true);
-   //   });
-
-   //   it('simulates click events', () => {
-   //     const onButtonClick = sinon.spy();
-   //     const wrapper = shallow(<Foo onButtonClick={onButtonClick} />);
-   //     wrapper.find('button').simulate('click');
-   //     expect(onButtonClick).to.have.property('callCount', 1);
-   //   });
 });

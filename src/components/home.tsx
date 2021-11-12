@@ -15,7 +15,7 @@ export default function Home() {
 interface PageLinkProps {
   url: string
   children: any
-  [x:string]: any
+  [x: string]: any
 }
 
 // { url, children, ...rest }

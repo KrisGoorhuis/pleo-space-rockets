@@ -15,7 +15,7 @@ export const fetcher = async (
   return await response.json();
 };
 
-export function getSpaceXUrl(path: string, options: QueryOptions) { 
+export function getSpaceXUrl(path: string, options: QueryOptions) {
   const searchParams = new URLSearchParams();
   for (const property in options) {
     searchParams.append(property, options[property]);
