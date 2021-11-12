@@ -25,26 +25,38 @@ export default function Launches() {
   console.log("data")
   console.log(data)
 
-  const MyComponent1editedagain = (props: { data: Launch[] }) => {
-    const array = [1, 2, 3]
+
+  const MyComponent1editedagainagain = (props: { data: Launch[] }) => {
     return (
       <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
         {
-          (props.data.flat() || array).map((item, i) => {
+          (props.data.flat()).map((item, i) => {
             return (
-              <div>
-                <LaunchItem launch={item} key={item.flight_number + i} />
-              </div>
+              <LaunchItem launch={item} key={item.flight_number + i} />
             )
           })
         }
       </SimpleGrid>
     )
   }
-  const MyComponent1editedagainagain = (props: { data: Launch[] }) => {
+  const TestComponent = (props: { data: Launch[] }) => {
     return (
       <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
         {
+          (props.data.flat()).map((item, i) => {
+            return (
+              <LaunchItem launch={item} key={item.flight_number + i} />
+            )
+          })
+        }
+      </SimpleGrid>
+    )
+  }
+  const TestComponent2 = (props: { data: Launch[] | undefined }) => {
+    return (
+      <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
+        {error && <Error />}
+        {props.data &&
           (props.data.flat()).map((item, i) => {
             return (
               <LaunchItem launch={item} key={item.flight_number + i} />
@@ -62,8 +74,9 @@ export default function Launches() {
         items={[{ label: "Home", to: "/" }, { label: "Launches" }]}
       />
 
-      <MyComponent1editedagain data={data || [ExampleLaunch]} />
       <MyComponent1editedagainagain data={data || [ExampleLaunch]} />
+      <TestComponent data={data || []} />
+      <TestComponent2 data={data} />
 
       <SimpleGrid >
         {error && <Error />}
