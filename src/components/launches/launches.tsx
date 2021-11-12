@@ -23,6 +23,8 @@ export default function Launches() {
 
 
 
+  // This is essentially the same as what already existed in this component, but for some reason Netlify likes this much better.
+  // Mapped items simply didn't appear before as they did locally.
   const LaunchMapper = (props: { data: Launch[] | undefined }) => {
     return (
       <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
@@ -44,30 +46,7 @@ export default function Launches() {
       <Breadcrumbs
         items={[{ label: "Home", to: "/" }, { label: "Launches" }]}
       />
-
       <LaunchMapper data={data} />
-
-      <SimpleGrid >
-        {error && <Error />}
-        {data &&
-          data
-            .flat()
-            .map((launch, i) => ( // Key change used for testing purposes
-              <LaunchItem launch={launch} key={launch.flight_number + i} />
-            ))}
-      </SimpleGrid>
-      <SimpleGrid >
-        {error && <Error />}
-        {data &&
-          data
-            .flat()
-            .map((launch, i) => {
-              return ( // Key change used for testing purposes
-                <LaunchItem launch={launch} key={launch.flight_number + i} />
-              )
-            })
-        }
-      </SimpleGrid>
       <LoadMoreButton
         loadMore={() => size && setSize && setSize(size + 1)}
         data={data}
