@@ -8,6 +8,11 @@ import store from './redux'
 import App from "./components/app";
 
 
+const { ApolloServer } = require('apollo-server');
+const typeDefs = require('./schema');
+
+const server = new ApolloServer({ typeDefs });
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>
